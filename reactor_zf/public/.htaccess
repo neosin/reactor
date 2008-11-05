@@ -1,0 +1,18 @@
+FileETag none
+
+<IfModule mod_expires.c>
+### turn on the Expires engine
+ExpiresActive On
+### expires after a month in the client's cache
+ExpiresByType image/gif A2592000
+ExpiresByType image/png A2592000
+ExpiresByType image/jpg A2592000
+ExpiresByType image/x-icon A2592000
+ExpiresByType application/pdf A2592000
+ExpiresByType application/x-javascript A2592000
+ExpiresByType text/plain A2592000
+### expires after 4.8 hours
+ExpiresByType text/css A2592000
+</IfModule>
+
+RewriteEngine off
