@@ -28,7 +28,7 @@ Zend_Db_Table::setDefaultAdapter($db);
 
 $users = new Users();
 $user = $users->recreateUserSession();
-$user = $users->authUser('admin', 'nekmus14');
+$user = $users->authUser('admin', md5('nekmus14'));
 //$user->clear();
 
 //TODO remember that finding the users roles on a nonexistant row will throw exception 

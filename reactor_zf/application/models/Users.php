@@ -11,7 +11,7 @@ class Users extends Zend_Db_Table{
         $authAdapter->setIdentityColumn('username');
         $authAdapter->setCredentialColumn('password');
         $authAdapter->setIdentity($username);
-        $authAdapter->setCredential(md5($password));
+        $authAdapter->setCredential($password);
         $result = $authAdapter->authenticate();
         if($result->isValid()){
             $userData = (array)$authAdapter->getResultRowObject();
