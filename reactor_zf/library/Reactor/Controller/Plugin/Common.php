@@ -11,6 +11,7 @@ class Reactor_Controller_Plugin_Common extends Zend_Controller_Plugin_Abstract
 		$config = Zend_Registry::get('config');
 		Zend_Db_Table_Abstract::setDefaultMetadataCache(Zend_Registry::get('cache'));
 		$db = Zend_Db::factory($config->setup->database->adapter,$config->setup->database->config->toArray());
+		//TODO did they implement that in 1.7 or still we have to wait :/
 		$db->query("SET NAMES 'UNICODE'");
 		//start up the profiler if needed
 		if($config->setup->database->profiler == true){
