@@ -284,224 +284,7 @@ END$BODY$
   LANGUAGE 'plpgsql' VOLATILE
   COST 100;
 --query--
-DROP TABLE acl CASCADE;
---query--
-CREATE TABLE acl
-(
-  "object" integer NOT NULL DEFAULT 0,
-  permission integer NOT NULL DEFAULT 0,
-  "role" integer NOT NULL DEFAULT 0,
-  CONSTRAINT acl_pkey PRIMARY KEY (object, permission, role),
-  CONSTRAINT acl_role_fkey FOREIGN KEY ("role")
-      REFERENCES roles (id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE CASCADE
-);
---query--
-DROP TABLE clients CASCADE;
---query--
-CREATE TABLE clients
-(
-  id serial NOT NULL,
-  "name" character varying(255) NOT NULL,
-  website character varying(255),
-  market_symbol character varying(10),
-  employees integer NOT NULL DEFAULT 0,
-  "owner" character varying(255),
-  "type" smallint,
-  trade smallint,
-  update_time timestamp without time zone,
-  creation_time timestamp without time zone NOT NULL DEFAULT now(),
-  phone1 character varying(20),
-  fax1 character varying(20),
-  phone2 character varying(20),
-  fax2 character varying(20),
-  email1 character varying(50),
-  email2 character varying(50),
-  evaluation character varying(30),
-  yearly_income integer,
-  permission_to_send_mail boolean,
-  notifications_to_client boolean,
-  description text,
-  invoice_address character varying(255),
-  invoice_pobox character varying(255),
-  invoice_city character varying(255),
-  invoice_district character varying(100),
-  invoice_postal_number character varying(30),
-  invoice_country character varying(50),
-  sending_address character varying(255),
-  sending_pobox character varying(255),
-  sending_city character varying(255),
-  sending_district character varying(100),
-  sending_postal_number character varying(30),
-  sending_country character varying(50),
-  CONSTRAINT clients_pkey PRIMARY KEY (id)
-);
---query--
-CREATE INDEX clients_name
-  ON clients
-  USING btree
-  (name);
---query--
-DROP TABLE clients_users_bindings CASCADE;
---query--
-  CREATE TABLE clients_users_bindings
-(
-  temporary_table character varying(255)
-);
---query--
-DROP TABLE document_files CASCADE;
---query--
-CREATE TABLE document_files
-(
-  "object" integer NOT NULL DEFAULT 0,
-  filename character varying(100) NOT NULL,
-  title character varying(150) NOT NULL,
-  description text,
-  downloads integer NOT NULL DEFAULT 0,
-  private boolean NOT NULL DEFAULT true,
-  sort integer NOT NULL DEFAULT 0,
-  id serial NOT NULL,
-  CONSTRAINT document_files_pkey PRIMARY KEY (id),
-  CONSTRAINT document_files_object_fkey FOREIGN KEY ("object")
-      REFERENCES site_objects (id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE CASCADE
-);
---query--
-CREATE INDEX object_idx2
-  ON document_files
-  USING btree
-  (object);
---query--
-CREATE TRIGGER document_file_ad
-  AFTER DELETE
-  ON document_files
-  FOR EACH ROW
-  EXECUTE PROCEDURE document_file_ad();
---query--
-CREATE TRIGGER document_file_au
-  AFTER UPDATE
-  ON document_files
-  FOR EACH ROW
-  EXECUTE PROCEDURE document_file_au();
---query--
-CREATE TRIGGER document_file_bi
-  BEFORE INSERT
-  ON document_files
-  FOR EACH ROW
-  EXECUTE PROCEDURE document_file_bi();
---query--
-DROP TABLE document_pages CASCADE;
---query--
-CREATE TABLE document_pages
-(
-  "object" integer NOT NULL DEFAULT 0,
-  title text,
-  description text,
-  body text,
-  sort integer NOT NULL DEFAULT 0,
-  views integer NOT NULL DEFAULT 0,
-  modified timestamp without time zone DEFAULT now(),
-  created timestamp without time zone NOT NULL DEFAULT now(),
-  id serial NOT NULL,
-  CONSTRAINT document_pages_pkey PRIMARY KEY (id),
-  CONSTRAINT document_pages_object_fkey FOREIGN KEY ("object")
-      REFERENCES site_objects (id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE CASCADE
-);
---query--
-CREATE INDEX page_object_sorting_index
-  ON document_pages
-  USING btree
-  (object, sort);
---query--
-CREATE TRIGGER document_page_ad
-  AFTER DELETE
-  ON document_pages
-  FOR EACH ROW
-  EXECUTE PROCEDURE document_page_ad();
---query--
-CREATE TRIGGER document_page_bi
-  BEFORE INSERT
-  ON document_pages
-  FOR EACH ROW
-  EXECUTE PROCEDURE document_page_bi();
---query--
-DROP TABLE gallery_images CASCADE;
---query--
-CREATE TABLE gallery_images
-(
-  id serial NOT NULL,
-  title character varying(255),
-  description text,
-  votes integer NOT NULL DEFAULT 0,
-  tags character varying(255),
-  picture_path text,
-  "owner" integer NOT NULL DEFAULT 0,
-  comments integer NOT NULL DEFAULT 0,
-  "object" integer NOT NULL DEFAULT 0,
-  creation_date timestamp without time zone NOT NULL DEFAULT now(),
-  CONSTRAINT gallery_images_pkey PRIMARY KEY (id)
-);
---query--
-CREATE INDEX image_insert_time
-  ON gallery_images
-  USING btree
-  (creation_date);
---query--
-CREATE INDEX image_onwer
-  ON gallery_images
-  USING btree
-  (owner);
---query--
-CREATE INDEX image_title
-  ON gallery_images
-  USING btree
-  (title);
---query--
-DROP TABLE garbage_collection_files CASCADE;
---query--
-CREATE TABLE garbage_collection_files
-(
-  file_location text NOT NULL,
-  CONSTRAINT garbage_collection_files_pkey PRIMARY KEY (file_location)
-);
---query--
-DROP TABLE messages CASCADE;
---query--
-CREATE TABLE messages
-(
-  temporary_table character varying(255)
-);
---query--
-DROP TABLE messages_flow CASCADE;
---query--
-CREATE TABLE messages_flow
-(
-  temporary_table character varying(255)
-);
---query--
-DROP TABLE products CASCADE;
---query--
-CREATE TABLE products
-(
-  temporary_table character varying(255)
-);
---query--
-DROP TABLE products_properties CASCADE;
---query--
-CREATE TABLE products_properties
-(
-  temporary_table character varying(255)
-);
---query--
-DROP TABLE products_propery_values CASCADE;
---query--
-CREATE TABLE products_propery_values
-(
-  temporary_table character varying(255)
-);
---query--
-DROP TABLE roles CASCADE;
+DROP TABLE IF EXISTS roles CASCADE;
 --query--
 CREATE TABLE roles
 (
@@ -512,18 +295,7 @@ CREATE TABLE roles
   CONSTRAINT roles_pkey PRIMARY KEY (id)
 );
 --query--
-DROP TABLE session CASCADE;
---query--
-CREATE TABLE "session"
-(
-  id character(32) NOT NULL,
-  modified integer,
-  lifetime integer,
-  data text,
-  CONSTRAINT session_pkey PRIMARY KEY (id)
-);
---query--
-DROP TABLE site_objects CASCADE;
+DROP TABLE IF EXISTS site_objects CASCADE;
 --query--
 CREATE TABLE site_objects
 (
@@ -548,7 +320,7 @@ CREATE TABLE site_objects
   allow_delete boolean NOT NULL DEFAULT true,
   publish_start timestamp without time zone,
   publish_end timestamp without time zone,
-  "owner" integer NOT NULL DEFAULT 0,
+  owner integer NOT NULL DEFAULT 0,
   parent_id integer,
   ordering integer,
   ordering_path text,
@@ -562,7 +334,27 @@ CREATE TABLE site_objects
   CONSTRAINT objects_ordering_path_key UNIQUE (ordering_path)
 );
 --query--
-DROP TABLE site_objects_tree CASCADE;
+CREATE INDEX creation_date
+  ON site_objects
+  USING btree
+  (creation_time);
+--query--
+CREATE INDEX object_status
+  ON site_objects
+  USING btree
+  (status);
+--query--
+CREATE INDEX object_title
+  ON site_objects
+  USING btree
+  (title);
+--query--
+CREATE INDEX publishing_dates
+  ON site_objects
+  USING btree
+  (publish_start, publish_end);
+--query--
+DROP TABLE IF EXISTS site_objects_tree CASCADE;
 --query--
 CREATE TABLE site_objects_tree
 (
@@ -580,47 +372,13 @@ CREATE TABLE site_objects_tree
   CONSTRAINT objects_tree_parent_id_key UNIQUE (parent_id, child_id)
 );
 --query--
-DROP TABLE task_asignees CASCADE;
---query--
-CREATE TABLE task_asignees
-(
-  temporary_table character varying(255)
-);
---query--
-DROP TABLE task_steps CASCADE;
---query--
-CREATE TABLE task_steps
-(
-  temporary_table character varying(255)
-);
---query--
-DROP TABLE tasks CASCADE;
---query--
-CREATE TABLE tasks
-(
-  temporary_table character varying(255)
-);
---query--
-DROP TABLE user_phones CASCADE;
---query--
-CREATE TABLE user_phones
-(
-  "user" integer NOT NULL DEFAULT 0,
-  phone character varying(25) NOT NULL,
-  description character varying(200) NOT NULL,
-  CONSTRAINT user_phones_pkey PRIMARY KEY ("user", phone, description),
-  CONSTRAINT user_phones_user_fkey FOREIGN KEY ("user")
-      REFERENCES users (id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE CASCADE
-);
---query--
-DROP TABLE users CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
 --query--
 CREATE TABLE users
 (
   id serial NOT NULL,
   username character varying(50) NOT NULL,
-  "password" character varying(32),
+  password character varying(32),
   status smallint NOT NULL DEFAULT 0,
   email character varying(100) NOT NULL,
   last_logged_timestamp timestamp without time zone DEFAULT now(),
@@ -662,7 +420,269 @@ CREATE TABLE users
   CONSTRAINT users_pkey PRIMARY KEY (id)
 );
 --query--
-DROP TABLE users_ims CASCADE;
+CREATE UNIQUE INDEX unique_email
+  ON users
+  USING btree
+  (lower(email::text));
+--query--
+CREATE UNIQUE INDEX unique_username
+  ON users
+  USING btree
+  (lower(username::text));
+--query--
+CREATE INDEX user_birthday
+  ON users
+  USING btree
+  (birthday_date);
+--query--
+CREATE INDEX user_gender
+  ON users
+  USING btree
+  (gender_is_male);
+--query--
+CREATE INDEX user_status
+  ON users
+  USING btree
+  (status);
+--query--
+CREATE INDEX user_warnings
+  ON users
+  USING btree
+  (warnings);
+--query--
+DROP TABLE IF EXISTS acl CASCADE;
+--query--
+CREATE TABLE acl
+(
+  object integer NOT NULL DEFAULT 0,
+  permission integer NOT NULL DEFAULT 0,
+  role integer NOT NULL DEFAULT 0,
+  CONSTRAINT acl_pkey PRIMARY KEY (object, permission, role),
+  CONSTRAINT acl_role_fkey FOREIGN KEY (role)
+      REFERENCES roles (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE CASCADE
+);
+--query--
+DROP TABLE IF EXISTS clients CASCADE;
+--query--
+CREATE TABLE clients
+(
+  id serial NOT NULL,
+  name character varying(255) NOT NULL,
+  website character varying(255),
+  market_symbol character varying(10),
+  employees integer NOT NULL DEFAULT 0,
+  owner character varying(255),
+  type smallint,
+  trade smallint,
+  update_time timestamp without time zone,
+  creation_time timestamp without time zone NOT NULL DEFAULT now(),
+  phone1 character varying(20),
+  fax1 character varying(20),
+  phone2 character varying(20),
+  fax2 character varying(20),
+  email1 character varying(50),
+  email2 character varying(50),
+  evaluation character varying(30),
+  yearly_income integer,
+  permission_to_send_mail boolean,
+  notifications_to_client boolean,
+  description text,
+  invoice_address character varying(255),
+  invoice_pobox character varying(255),
+  invoice_city character varying(255),
+  invoice_district character varying(100),
+  invoice_postal_number character varying(30),
+  invoice_country character varying(50),
+  sending_address character varying(255),
+  sending_pobox character varying(255),
+  sending_city character varying(255),
+  sending_district character varying(100),
+  sending_postal_number character varying(30),
+  sending_country character varying(50),
+  CONSTRAINT clients_pkey PRIMARY KEY (id)
+);
+--query--
+CREATE INDEX clients_name
+  ON clients
+  USING btree
+  (name);
+--query--
+DROP TABLE IF EXISTS clients_users_bindings CASCADE;
+--query--
+  CREATE TABLE clients_users_bindings
+(
+  temporary_table character varying(255)
+);
+--query--
+DROP TABLE IF EXISTS document_files CASCADE;
+--query--
+CREATE TABLE document_files
+(
+  object integer NOT NULL DEFAULT 0,
+  filename character varying(100) NOT NULL,
+  title character varying(150) NOT NULL,
+  description text,
+  downloads integer NOT NULL DEFAULT 0,
+  private boolean NOT NULL DEFAULT true,
+  sort integer NOT NULL DEFAULT 0,
+  id serial NOT NULL,
+  CONSTRAINT document_files_pkey PRIMARY KEY (id),
+  CONSTRAINT document_files_object_fkey FOREIGN KEY (object)
+      REFERENCES site_objects (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE CASCADE
+);
+--query--
+CREATE INDEX object_idx2
+  ON document_files
+  USING btree
+  (object);
+--query--
+DROP TABLE IF EXISTS document_pages CASCADE;
+--query--
+CREATE TABLE document_pages
+(
+  object integer NOT NULL DEFAULT 0,
+  title text,
+  description text,
+  body text,
+  sort integer NOT NULL DEFAULT 0,
+  views integer NOT NULL DEFAULT 0,
+  modified timestamp without time zone DEFAULT now(),
+  created timestamp without time zone NOT NULL DEFAULT now(),
+  id serial NOT NULL,
+  CONSTRAINT document_pages_pkey PRIMARY KEY (id),
+  CONSTRAINT document_pages_object_fkey FOREIGN KEY (object)
+      REFERENCES site_objects (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE CASCADE
+);
+--query--
+CREATE INDEX page_object_sorting_index
+  ON document_pages
+  USING btree
+  (object, sort);
+--query--
+DROP TABLE IF EXISTS gallery_images CASCADE;
+--query--
+CREATE TABLE gallery_images
+(
+  id serial NOT NULL,
+  title character varying(255),
+  description text,
+  votes integer NOT NULL DEFAULT 0,
+  tags character varying(255),
+  picture_path text,
+  owner integer NOT NULL DEFAULT 0,
+  comments integer NOT NULL DEFAULT 0,
+  object integer NOT NULL DEFAULT 0,
+  creation_date timestamp without time zone NOT NULL DEFAULT now(),
+  CONSTRAINT gallery_images_pkey PRIMARY KEY (id)
+);
+--query--
+CREATE INDEX image_insert_time
+  ON gallery_images
+  USING btree
+  (creation_date);
+--query--
+CREATE INDEX image_onwer
+  ON gallery_images
+  USING btree
+  (owner);
+--query--
+CREATE INDEX image_title
+  ON gallery_images
+  USING btree
+  (title);
+--query--
+DROP TABLE IF EXISTS garbage_collection_files CASCADE;
+--query--
+CREATE TABLE garbage_collection_files
+(
+  file_location text NOT NULL,
+  CONSTRAINT garbage_collection_files_pkey PRIMARY KEY (file_location)
+);
+--query--
+DROP TABLE IF EXISTS messages CASCADE;
+--query--
+CREATE TABLE messages
+(
+  temporary_table character varying(255)
+);
+--query--
+DROP TABLE IF EXISTS messages_flow CASCADE;
+--query--
+CREATE TABLE messages_flow
+(
+  temporary_table character varying(255)
+);
+--query--
+DROP TABLE IF EXISTS products CASCADE;
+--query--
+CREATE TABLE products
+(
+  temporary_table character varying(255)
+);
+--query--
+DROP TABLE IF EXISTS products_properties CASCADE;
+--query--
+CREATE TABLE products_properties
+(
+  temporary_table character varying(255)
+);
+--query--
+DROP TABLE IF EXISTS products_propery_values CASCADE;
+--query--
+CREATE TABLE products_propery_values
+(
+  temporary_table character varying(255)
+);
+--query--
+DROP TABLE IF EXISTS session CASCADE;
+--query--
+CREATE TABLE session
+(
+  id character(32) NOT NULL,
+  modified integer,
+  lifetime integer,
+  data text,
+  CONSTRAINT session_pkey PRIMARY KEY (id)
+);
+--query--
+DROP TABLE IF EXISTS task_asignees CASCADE;
+--query--
+CREATE TABLE task_asignees
+(
+  temporary_table character varying(255)
+);
+--query--
+DROP TABLE IF EXISTS task_steps CASCADE;
+--query--
+CREATE TABLE task_steps
+(
+  temporary_table character varying(255)
+);
+--query--
+DROP TABLE IF EXISTS tasks CASCADE;
+--query--
+CREATE TABLE tasks
+(
+  temporary_table character varying(255)
+);
+--query--
+DROP TABLE IF EXISTS user_phones CASCADE;
+--query--
+CREATE TABLE user_phones
+(
+  "user" integer NOT NULL DEFAULT 0,
+  phone character varying(25) NOT NULL,
+  description character varying(200) NOT NULL,
+  CONSTRAINT user_phones_pkey PRIMARY KEY ("user", phone, description),
+  CONSTRAINT user_phones_user_fkey FOREIGN KEY ("user")
+      REFERENCES users (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE CASCADE
+);
+--query--
+DROP TABLE IF EXISTS users_ims CASCADE;
 --query--
 CREATE TABLE users_ims
 (
@@ -675,17 +695,107 @@ CREATE TABLE users_ims
       ON UPDATE NO ACTION ON DELETE CASCADE
 );
 --query--
-DROP TABLE users_roles CASCADE;
+DROP TABLE IF EXISTS users_roles CASCADE;
 --query--
 CREATE TABLE users_roles
 (
   "user" integer NOT NULL DEFAULT 0,
-  "role" integer NOT NULL DEFAULT 0,
+  role integer NOT NULL DEFAULT 0,
   CONSTRAINT users_roles_pkey PRIMARY KEY ("user", role),
-  CONSTRAINT users_roles_role_fkey FOREIGN KEY ("role")
+  CONSTRAINT users_roles_role_fkey FOREIGN KEY (role)
       REFERENCES roles (id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE CASCADE,
   CONSTRAINT users_roles_user_fkey FOREIGN KEY ("user")
       REFERENCES users (id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE CASCADE
 );
+--query--
+CREATE TRIGGER document_file_ad
+  AFTER DELETE
+  ON document_files
+  FOR EACH ROW
+  EXECUTE PROCEDURE document_file_ad();
+--query--
+CREATE TRIGGER document_file_au
+  AFTER UPDATE
+  ON document_files
+  FOR EACH ROW
+  EXECUTE PROCEDURE document_file_au();
+--query--
+CREATE TRIGGER document_file_bi
+  BEFORE INSERT
+  ON document_files
+  FOR EACH ROW
+  EXECUTE PROCEDURE document_file_bi();
+--query--
+CREATE TRIGGER document_page_ad
+  AFTER DELETE
+  ON document_pages
+  FOR EACH ROW
+  EXECUTE PROCEDURE document_page_ad();
+--query--
+CREATE TRIGGER document_page_bi
+  BEFORE INSERT
+  ON document_pages
+  FOR EACH ROW
+  EXECUTE PROCEDURE document_page_bi();
+--query--
+CREATE TRIGGER tree_objects_ai
+  AFTER INSERT
+  ON site_objects
+  FOR EACH ROW
+  EXECUTE PROCEDURE tree_objects_ai();
+--query--
+CREATE TRIGGER tree_objects_au
+  AFTER UPDATE
+  ON site_objects
+  FOR EACH ROW
+  EXECUTE PROCEDURE tree_objects_au();
+--query--
+CREATE TRIGGER tree_objects_bu
+  BEFORE UPDATE
+  ON site_objects
+  FOR EACH ROW
+  EXECUTE PROCEDURE tree_objects_bu();
+--query--
+CREATE TRIGGER tree_ordering_path_objects_bi
+  BEFORE INSERT
+  ON site_objects
+  FOR EACH ROW
+  EXECUTE PROCEDURE tree_ordering_path_objects_bi();
+--query--
+CREATE TRIGGER tree_ordering_path_objects_bu
+  BEFORE UPDATE
+  ON site_objects
+  FOR EACH ROW
+  EXECUTE PROCEDURE tree_ordering_path_objects_bu();
+--query--
+CREATE TRIGGER tree_path_objects_bi
+  BEFORE INSERT
+  ON site_objects
+  FOR EACH ROW
+  EXECUTE PROCEDURE tree_path_objects_bi();
+--query--
+CREATE TRIGGER tree_path_objects_bu
+  BEFORE UPDATE
+  ON site_objects
+  FOR EACH ROW
+  EXECUTE PROCEDURE tree_path_objects_bu();  
+--query--
+CREATE TRIGGER users_ai
+  AFTER INSERT
+  ON users
+  FOR EACH ROW
+  EXECUTE PROCEDURE user_ai();
+--query--
+INSERT INTO site_objects (id, title, parent_id, ordering) VALUES
+(1, 'a', NULL, 100),
+(2, 'b', NULL, 200),
+(3, 'c', 1, 300),
+(4, 'd', 2, 400),
+(5, 'e', 3, 500),
+(6, 'f', 3, 600),
+(7, 'g', 3, 700),
+(8, 'h', 6, 800),
+(9, 'i', 7, 900),
+(10, 'j', 8, 1000);
