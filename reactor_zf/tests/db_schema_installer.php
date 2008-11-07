@@ -18,7 +18,7 @@ include_once 'Zend/Db/Table/Rowset.php';
 include_once 'Zend/Db/Table/Row.php';
 include_once 'Zend/Db/Table/Select.php';
 
-$dbEngine = 'PDO_PGSQL';
+$dbEngine = 'PDO_MYSQL';
 $results = array();
 $queries = array();
 try{
