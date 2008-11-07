@@ -289,11 +289,11 @@ DROP TABLE IF EXISTS roles CASCADE;
 CREATE TABLE roles
 (
   id serial NOT NULL,
-  "name" character varying(100) NOT NULL,
+  name character varying(100) NOT NULL,
   description text NOT NULL,
   users integer NOT NULL DEFAULT 0,
   CONSTRAINT roles_pkey PRIMARY KEY (id)
-);
+) ENGINE InnoDB CHARACTER SET=utf8;
 --query--
 DROP TABLE IF EXISTS site_objects CASCADE;
 --query--
@@ -303,11 +303,11 @@ CREATE TABLE site_objects
   title character varying(160),
   description text,
   tags text,
-  "type" smallint NOT NULL DEFAULT 0,
+  type smallint NOT NULL DEFAULT 0,
   views integer DEFAULT 0,
   status boolean NOT NULL DEFAULT false,
-  creation_time timestamp without time zone NOT NULL DEFAULT now(),
-  edition_time timestamp without time zone,
+  creation_time timestamp NOT NULL DEFAULT now(),
+  edition_time timestamp,
   pages_total smallint NOT NULL DEFAULT 0,
   topics_total integer NOT NULL DEFAULT 0,
   posts_total integer NOT NULL DEFAULT 0,
@@ -318,8 +318,8 @@ CREATE TABLE site_objects
   support_menu boolean NOT NULL DEFAULT false,
   list_child_objects boolean NOT NULL DEFAULT false,
   allow_delete boolean NOT NULL DEFAULT true,
-  publish_start timestamp without time zone,
-  publish_end timestamp without time zone,
+  publish_start timestamp,
+  publish_end timestamp,
   owner integer NOT NULL DEFAULT 0,
   parent_id integer,
   ordering integer,
@@ -332,7 +332,7 @@ CREATE TABLE site_objects
       ON UPDATE NO ACTION ON DELETE CASCADE,
   CONSTRAINT objects_ordering_key UNIQUE (ordering),
   CONSTRAINT objects_ordering_path_key UNIQUE (ordering_path)
-);
+) ENGINE InnoDB CHARACTER SET=utf8;
 --query--
 CREATE INDEX creation_date
   ON site_objects
@@ -370,7 +370,7 @@ CREATE TABLE site_objects_tree
       REFERENCES site_objects (id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE CASCADE,
   CONSTRAINT objects_tree_parent_id_key UNIQUE (parent_id, child_id)
-);
+) ENGINE InnoDB CHARACTER SET=utf8;
 --query--
 DROP TABLE IF EXISTS users CASCADE;
 --query--
@@ -418,7 +418,7 @@ CREATE TABLE users
   supervisor_id integer,
   postal_number character varying(20),
   CONSTRAINT users_pkey PRIMARY KEY (id)
-);
+) ENGINE InnoDB CHARACTER SET=utf8;
 --query--
 CREATE UNIQUE INDEX unique_email
   ON users
@@ -461,7 +461,7 @@ CREATE TABLE acl
   CONSTRAINT acl_role_fkey FOREIGN KEY (role)
       REFERENCES roles (id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE CASCADE
-);
+) ENGINE InnoDB CHARACTER SET=utf8;
 --query--
 DROP TABLE IF EXISTS clients CASCADE;
 --query--
@@ -501,7 +501,7 @@ CREATE TABLE clients
   sending_postal_number character varying(30),
   sending_country character varying(50),
   CONSTRAINT clients_pkey PRIMARY KEY (id)
-);
+) ENGINE InnoDB CHARACTER SET=utf8;
 --query--
 CREATE INDEX clients_name
   ON clients
@@ -513,7 +513,7 @@ DROP TABLE IF EXISTS clients_users_bindings CASCADE;
   CREATE TABLE clients_users_bindings
 (
   temporary_table character varying(255)
-);
+) ENGINE InnoDB CHARACTER SET=utf8;
 --query--
 DROP TABLE IF EXISTS document_files CASCADE;
 --query--
@@ -531,7 +531,7 @@ CREATE TABLE document_files
   CONSTRAINT document_files_object_fkey FOREIGN KEY (object)
       REFERENCES site_objects (id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE CASCADE
-);
+) ENGINE InnoDB CHARACTER SET=utf8;
 --query--
 CREATE INDEX object_idx2
   ON document_files
@@ -555,7 +555,7 @@ CREATE TABLE document_pages
   CONSTRAINT document_pages_object_fkey FOREIGN KEY (object)
       REFERENCES site_objects (id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE CASCADE
-);
+) ENGINE InnoDB CHARACTER SET=utf8;
 --query--
 CREATE INDEX page_object_sorting_index
   ON document_pages
@@ -577,7 +577,7 @@ CREATE TABLE gallery_images
   object integer NOT NULL DEFAULT 0,
   creation_date timestamp without time zone NOT NULL DEFAULT now(),
   CONSTRAINT gallery_images_pkey PRIMARY KEY (id)
-);
+) ENGINE InnoDB CHARACTER SET=utf8;
 --query--
 CREATE INDEX image_insert_time
   ON gallery_images
@@ -600,42 +600,42 @@ CREATE TABLE garbage_collection_files
 (
   file_location text NOT NULL,
   CONSTRAINT garbage_collection_files_pkey PRIMARY KEY (file_location)
-);
+) ENGINE InnoDB CHARACTER SET=utf8;
 --query--
 DROP TABLE IF EXISTS messages CASCADE;
 --query--
 CREATE TABLE messages
 (
   temporary_table character varying(255)
-);
+) ENGINE InnoDB CHARACTER SET=utf8;
 --query--
 DROP TABLE IF EXISTS messages_flow CASCADE;
 --query--
 CREATE TABLE messages_flow
 (
   temporary_table character varying(255)
-);
+) ENGINE InnoDB CHARACTER SET=utf8;
 --query--
 DROP TABLE IF EXISTS products CASCADE;
 --query--
 CREATE TABLE products
 (
   temporary_table character varying(255)
-);
+) ENGINE InnoDB CHARACTER SET=utf8;
 --query--
 DROP TABLE IF EXISTS products_properties CASCADE;
 --query--
 CREATE TABLE products_properties
 (
   temporary_table character varying(255)
-);
+) ENGINE InnoDB CHARACTER SET=utf8;
 --query--
 DROP TABLE IF EXISTS products_propery_values CASCADE;
 --query--
 CREATE TABLE products_propery_values
 (
   temporary_table character varying(255)
-);
+) ENGINE InnoDB CHARACTER SET=utf8;
 --query--
 DROP TABLE IF EXISTS session CASCADE;
 --query--
@@ -646,28 +646,28 @@ CREATE TABLE session
   lifetime integer,
   data text,
   CONSTRAINT session_pkey PRIMARY KEY (id)
-);
+) ENGINE InnoDB CHARACTER SET=utf8;
 --query--
 DROP TABLE IF EXISTS task_asignees CASCADE;
 --query--
 CREATE TABLE task_asignees
 (
   temporary_table character varying(255)
-);
+) ENGINE InnoDB CHARACTER SET=utf8;
 --query--
 DROP TABLE IF EXISTS task_steps CASCADE;
 --query--
 CREATE TABLE task_steps
 (
   temporary_table character varying(255)
-);
+) ENGINE InnoDB CHARACTER SET=utf8;
 --query--
 DROP TABLE IF EXISTS tasks CASCADE;
 --query--
 CREATE TABLE tasks
 (
   temporary_table character varying(255)
-);
+) ENGINE InnoDB CHARACTER SET=utf8;
 --query--
 DROP TABLE IF EXISTS user_phones CASCADE;
 --query--
@@ -680,7 +680,7 @@ CREATE TABLE user_phones
   CONSTRAINT user_phones_user_fkey FOREIGN KEY ("user")
       REFERENCES users (id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE CASCADE
-);
+) ENGINE InnoDB CHARACTER SET=utf8;
 --query--
 DROP TABLE IF EXISTS users_ims CASCADE;
 --query--
@@ -693,7 +693,7 @@ CREATE TABLE users_ims
   CONSTRAINT users_ims_user_fkey FOREIGN KEY ("user")
       REFERENCES users (id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE CASCADE
-);
+) ENGINE InnoDB CHARACTER SET=utf8;
 --query--
 DROP TABLE IF EXISTS users_roles CASCADE;
 --query--
@@ -708,7 +708,7 @@ CREATE TABLE users_roles
   CONSTRAINT users_roles_user_fkey FOREIGN KEY ("user")
       REFERENCES users (id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE CASCADE
-);
+) ENGINE InnoDB CHARACTER SET=utf8;
 --query--
 CREATE TRIGGER document_file_ad
   AFTER DELETE
