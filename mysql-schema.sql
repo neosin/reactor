@@ -1,5 +1,5 @@
 --query--
-CREATE LANGUAGE plpgsql;
+SET FOREIGN_KEY_CHECKS=0
 --query--
 CREATE OR REPLACE FUNCTION document_file_ad()
   RETURNS trigger AS
@@ -288,7 +288,7 @@ DROP TABLE IF EXISTS roles CASCADE;
 --query--
 CREATE TABLE roles
 (
-  id serial NOT NULL,
+  id integer NOT NULL auto_increment,
   name character varying(100) NOT NULL,
   description text NOT NULL,
   users integer NOT NULL DEFAULT 0,
@@ -299,7 +299,7 @@ DROP TABLE IF EXISTS site_objects CASCADE;
 --query--
 CREATE TABLE site_objects
 (
-  id integer NOT NULL,
+  id integer NOT NULL auto_increment,
   title character varying(160),
   description text,
   tags text,
@@ -354,7 +354,7 @@ DROP TABLE IF EXISTS site_objects_tree CASCADE;
 --query--
 CREATE TABLE site_objects_tree
 (
-  id serial NOT NULL,
+  id integer NOT NULL auto_increment,
   parent_id integer NOT NULL,
   child_id integer NOT NULL,
   depth integer NOT NULL,
@@ -368,21 +368,21 @@ CREATE TABLE site_objects_tree
   CONSTRAINT objects_tree_parent_id_key UNIQUE (parent_id, child_id)
 ) ENGINE InnoDB CHARACTER SET=utf8;
 --query--
-DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS users;
 --query--
 CREATE TABLE users
 (
-  id serial NOT NULL,
+  id integer NOT NULL auto_increment,
   username character varying(50) NOT NULL,
   password character varying(32),
   status smallint NOT NULL DEFAULT 0,
   email character varying(100) NOT NULL,
+  registered_timestamp timestamp NOT NULL DEFAULT now(),
   last_logged_timestamp timestamp,
   last_logged_ip character varying(50),
-  registered_timestamp timestamp NOT NULL DEFAULT now(),
   registered_ip character varying(50),
   notes text,
-  ident bigint DEFAULT (random() * (100000000000000::bigint)::double precision),
+  ident bigint,
   avatar boolean NOT NULL DEFAULT false,
   gender_is_male boolean NOT NULL DEFAULT true,
   show_gender boolean NOT NULL DEFAULT true,
@@ -418,11 +418,11 @@ CREATE TABLE users
 --query--
 CREATE UNIQUE INDEX unique_email
   ON users
-  (lower(email::text));
+  (email);
 --query--
 CREATE UNIQUE INDEX unique_username
   ON users
-  (lower(username::text));
+  (username);
 --query--
 CREATE INDEX user_birthday
   ON users
@@ -457,7 +457,7 @@ DROP TABLE IF EXISTS clients CASCADE;
 --query--
 CREATE TABLE clients
 (
-  id serial NOT NULL,
+  id integer NOT NULL auto_increment,
   name character varying(255) NOT NULL,
   website character varying(255),
   market_symbol character varying(10),
@@ -465,8 +465,8 @@ CREATE TABLE clients
   owner character varying(255),
   type smallint,
   trade smallint,
-  update_time timestamp without time zone,
-  creation_time timestamp without time zone NOT NULL DEFAULT now(),
+  creation_time timestamp NOT NULL DEFAULT now(),
+  update_time timestamp,
   phone1 character varying(20),
   fax1 character varying(20),
   phone2 character varying(20),
@@ -495,7 +495,6 @@ CREATE TABLE clients
 --query--
 CREATE INDEX clients_name
   ON clients
-  USING btree
   (name);
 --query--
 DROP TABLE IF EXISTS clients_users_bindings CASCADE;
@@ -525,7 +524,6 @@ CREATE TABLE document_files
 --query--
 CREATE INDEX object_idx2
   ON document_files
-  USING btree
   (object);
 --query--
 DROP TABLE IF EXISTS document_pages CASCADE;
@@ -538,8 +536,8 @@ CREATE TABLE document_pages
   body text,
   sort integer NOT NULL DEFAULT 0,
   views integer NOT NULL DEFAULT 0,
-  modified timestamp without time zone DEFAULT now(),
-  created timestamp without time zone NOT NULL DEFAULT now(),
+  created timestamp NOT NULL DEFAULT now(),
+  modified timestamp,
   id serial NOT NULL,
   CONSTRAINT document_pages_pkey PRIMARY KEY (id),
   CONSTRAINT document_pages_object_fkey FOREIGN KEY (object)
@@ -549,14 +547,13 @@ CREATE TABLE document_pages
 --query--
 CREATE INDEX page_object_sorting_index
   ON document_pages
-  USING btree
   (object, sort);
 --query--
 DROP TABLE IF EXISTS gallery_images CASCADE;
 --query--
 CREATE TABLE gallery_images
 (
-  id serial NOT NULL,
+  id integer NOT NULL auto_increment,
   title character varying(255),
   description text,
   votes integer NOT NULL DEFAULT 0,
@@ -565,31 +562,27 @@ CREATE TABLE gallery_images
   owner integer NOT NULL DEFAULT 0,
   comments integer NOT NULL DEFAULT 0,
   object integer NOT NULL DEFAULT 0,
-  creation_date timestamp without time zone NOT NULL DEFAULT now(),
+  creation_date timestamp NOT NULL DEFAULT now(),
   CONSTRAINT gallery_images_pkey PRIMARY KEY (id)
 ) ENGINE InnoDB CHARACTER SET=utf8;
 --query--
 CREATE INDEX image_insert_time
   ON gallery_images
-  USING btree
   (creation_date);
 --query--
 CREATE INDEX image_onwer
   ON gallery_images
-  USING btree
   (owner);
 --query--
 CREATE INDEX image_title
   ON gallery_images
-  USING btree
   (title);
 --query--
 DROP TABLE IF EXISTS garbage_collection_files CASCADE;
 --query--
 CREATE TABLE garbage_collection_files
 (
-  file_location text NOT NULL,
-  CONSTRAINT garbage_collection_files_pkey PRIMARY KEY (file_location)
+  file_location text NOT NULL
 ) ENGINE InnoDB CHARACTER SET=utf8;
 --query--
 DROP TABLE IF EXISTS messages CASCADE;
@@ -663,11 +656,11 @@ DROP TABLE IF EXISTS user_phones CASCADE;
 --query--
 CREATE TABLE user_phones
 (
-  "user" integer NOT NULL DEFAULT 0,
+  `user` integer NOT NULL DEFAULT 0,
   phone character varying(25) NOT NULL,
   description character varying(200) NOT NULL,
-  CONSTRAINT user_phones_pkey PRIMARY KEY ("user", phone, description),
-  CONSTRAINT user_phones_user_fkey FOREIGN KEY ("user")
+  CONSTRAINT user_phones_pkey PRIMARY KEY (`user`, phone, description),
+  CONSTRAINT user_phones_user_fkey FOREIGN KEY (`user`)
       REFERENCES users (id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE CASCADE
 ) ENGINE InnoDB CHARACTER SET=utf8;
@@ -676,11 +669,11 @@ DROP TABLE IF EXISTS users_ims CASCADE;
 --query--
 CREATE TABLE users_ims
 (
-  "user" integer NOT NULL DEFAULT 0,
+  `user` integer NOT NULL DEFAULT 0,
   im character varying(50) NOT NULL,
   description character varying(255) NOT NULL,
-  CONSTRAINT users_ims_pkey PRIMARY KEY ("user", im, description),
-  CONSTRAINT users_ims_user_fkey FOREIGN KEY ("user")
+  CONSTRAINT users_ims_pkey PRIMARY KEY (`user`, im, description),
+  CONSTRAINT users_ims_user_fkey FOREIGN KEY (`user`)
       REFERENCES users (id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE CASCADE
 ) ENGINE InnoDB CHARACTER SET=utf8;
@@ -689,13 +682,13 @@ DROP TABLE IF EXISTS users_roles CASCADE;
 --query--
 CREATE TABLE users_roles
 (
-  "user" integer NOT NULL DEFAULT 0,
+  `user` integer NOT NULL DEFAULT 0,
   role integer NOT NULL DEFAULT 0,
-  CONSTRAINT users_roles_pkey PRIMARY KEY ("user", role),
+  CONSTRAINT users_roles_pkey PRIMARY KEY (`user`, role),
   CONSTRAINT users_roles_role_fkey FOREIGN KEY (role)
       REFERENCES roles (id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE CASCADE,
-  CONSTRAINT users_roles_user_fkey FOREIGN KEY ("user")
+  CONSTRAINT users_roles_user_fkey FOREIGN KEY (`user`)
       REFERENCES users (id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE CASCADE
 ) ENGINE InnoDB CHARACTER SET=utf8;
@@ -777,6 +770,8 @@ CREATE TRIGGER users_ai
   ON users
   FOR EACH ROW
   EXECUTE PROCEDURE user_ai();
+--query--
+SET FOREIGN_KEY_CHECKS=1
 --query--
 INSERT INTO site_objects (id, title, parent_id, ordering) VALUES
 (1, 'a', NULL, 100),

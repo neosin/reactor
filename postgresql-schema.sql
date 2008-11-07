@@ -598,8 +598,7 @@ DROP TABLE IF EXISTS garbage_collection_files CASCADE;
 --query--
 CREATE TABLE garbage_collection_files
 (
-  file_location text NOT NULL,
-  CONSTRAINT garbage_collection_files_pkey PRIMARY KEY (file_location)
+  file_location text NOT NULL
 );
 --query--
 DROP TABLE IF EXISTS messages CASCADE;
