@@ -299,7 +299,7 @@ DROP TABLE IF EXISTS site_objects CASCADE;
 --query--
 CREATE TABLE site_objects
 (
-  id serial NOT NULL,
+  id integer NOT NULL,
   title character varying(160),
   description text,
   tags text,
@@ -323,7 +323,7 @@ CREATE TABLE site_objects
   owner integer NOT NULL DEFAULT 0,
   parent_id integer,
   ordering integer,
-  ordering_path text,
+  ordering_path character varying(255),
   tree_path text,
   comments_total integer NOT NULL DEFAULT 0,
   CONSTRAINT objects_pkey PRIMARY KEY (id),
@@ -336,22 +336,18 @@ CREATE TABLE site_objects
 --query--
 CREATE INDEX creation_date
   ON site_objects
-  USING btree
   (creation_time);
 --query--
 CREATE INDEX object_status
   ON site_objects
-  USING btree
   (status);
 --query--
-CREATE INDEX object_title
+CREATE INDEX object_title 
   ON site_objects
-  USING btree
   (title);
 --query--
 CREATE INDEX publishing_dates
   ON site_objects
-  USING btree
   (publish_start, publish_end);
 --query--
 DROP TABLE IF EXISTS site_objects_tree CASCADE;
@@ -381,9 +377,9 @@ CREATE TABLE users
   password character varying(32),
   status smallint NOT NULL DEFAULT 0,
   email character varying(100) NOT NULL,
-  last_logged_timestamp timestamp without time zone DEFAULT now(),
+  last_logged_timestamp timestamp,
   last_logged_ip character varying(50),
-  registered_timestamp timestamp without time zone NOT NULL DEFAULT now(),
+  registered_timestamp timestamp NOT NULL DEFAULT now(),
   registered_ip character varying(50),
   notes text,
   ident bigint DEFAULT (random() * (100000000000000::bigint)::double precision),
@@ -422,32 +418,26 @@ CREATE TABLE users
 --query--
 CREATE UNIQUE INDEX unique_email
   ON users
-  USING btree
   (lower(email::text));
 --query--
 CREATE UNIQUE INDEX unique_username
   ON users
-  USING btree
   (lower(username::text));
 --query--
 CREATE INDEX user_birthday
   ON users
-  USING btree
   (birthday_date);
 --query--
 CREATE INDEX user_gender
   ON users
-  USING btree
   (gender_is_male);
 --query--
 CREATE INDEX user_status
   ON users
-  USING btree
   (status);
 --query--
 CREATE INDEX user_warnings
   ON users
-  USING btree
   (warnings);
 --query--
 DROP TABLE IF EXISTS acl CASCADE;
