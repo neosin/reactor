@@ -37,6 +37,7 @@ CREATE TABLE site_objects
   owner integer NOT NULL DEFAULT 0,
   parent_id integer,
   depth integer,
+  ordering integer,
   lft integer,
   rgt integer,
   comments_total integer NOT NULL DEFAULT 0,
