@@ -6,5 +6,12 @@ class User extends Zend_Db_Table_Row{
         $auth->clearIdentity();
         $this->setFromArray($this->getTable()->createRow()->toArray());
     }
+    
+    public function findUsersRoles(){
+        if($this->id == null){
+            return array();
+        }
+        parent::findUsersRoles();
+    }
 }
 ?>
