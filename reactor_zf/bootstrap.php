@@ -37,16 +37,14 @@ include_once 'Zend/Translate.php';
 include_once 'Reactor/Acl.php';
 include_once 'Reactor/Controller/Plugin/Common.php';
 include_once 'Reactor/DbTable.php';
-include_once 'Reactor/Form/Scaffolding.php';
 include_once 'Reactor/Image.php';
-include_once 'Reactor/User.php';
 include_once 'forms/SimpleConfimation.php';
 include_once 'forms/LogIn.php';
-include_once 'models/Object.php';
-include_once 'models/Object/Foundation.php';
-include_once('models/Object/Document.php');
-include_once('models/Object/Gallery.php');
-include_once 'models/Role.php';
+#include_once 'models/Object.php';
+#include_once 'models/Object/Foundation.php';
+#include_once('models/Object/Document.php');
+#include_once('models/Object/Gallery.php');
+#include_once 'models/Role.php';
 
 
 //shut down magic quotes

@@ -22,19 +22,17 @@ include_once 'models/Users.php';
 include_once 'models/User.php';
 include_once 'models/UsersRoles.php';
 
-$db = Zend_Db::factory('PDO_PGSQL',array('username' => "test",'password' => "test", 'dbname' => "cms",'host' => "localhost"));
+$db = Zend_Db::factory('PDO_PGSQL',array('username' => "test",'password' => "test", 'dbname' => "reactor",'host' => "localhost"));
 $db->query("SET NAMES 'UNICODE'");
 Zend_Db_Table::setDefaultAdapter($db);
 
 $users = new Users();
 $user = $users->recreateUserSession();
 $user = $users->authUser('admin', md5('nekmus14'));
-//$user->clear();
-
-//TODO remember that finding the users roles on a nonexistant row will throw exception 
+#$user->clear();
 ?>
 <pre>
 <?php 
-var_dump($user->findUsersRoles()->toArray());
+var_dump($user->findUsersRoles());
 ?>
 </pre>
