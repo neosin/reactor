@@ -45,7 +45,9 @@ include_once 'forms/LogIn.php';
 #include_once('models/Object/Document.php');
 #include_once('models/Object/Gallery.php');
 #include_once 'models/Role.php';
-
+include_once 'models/Users.php';
+include_once 'models/User.php';
+include_once 'models/UsersRoles.php';
 
 //shut down magic quotes
 if (get_magic_quotes_gpc()) {
