@@ -50,12 +50,14 @@ class Reactor_Acl{
         $select->where('object = ?',(int)$object);
         #resource for test
         $acl->add(new Zend_Acl_Resource($object));
+        #caching
         $permsAvailable = $cache->load(md5($select->__toString()));
         if($permsAvailable === false) {
             $permsAvailable = array();
+            #TODO is there a more efficient way to do it instead of casting to array and then casting to object ? 
             $aclResources = self::getAclTable()->fetchAll($select)->toArray();
             foreach($aclResources as $aclResource){
-                array_push($permsAvailable, new Reactor_Default_Model($aclResource));
+                array_push($permsAvailable, (object)$aclResource);
             }
             $cache->save($permsAvailable, md5($select->__toString()), array('acl'));
         }
@@ -66,6 +68,7 @@ class Reactor_Acl{
             }
         }
         #admin has access to everything
+        #admin group has id of 2 in db
         if(in_array(2,$tmpRoles)){
             $acl->allow(2);
         }
