@@ -1,0 +1,70 @@
+<?php
+echo $this->doctype('XHTML1_STRICT');?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<?= $this->headTitle($this->translate('administration'));?>
+<?= $this->headMeta()->appendName('keywords', 'cms system')
+->appendName('Content-Type', 'text/html; charset=utf-8')
+->appendName('robots', 'all')
+->appendName('revisit-after', '2 days')
+->appendName('Pragma', 'cache');
+?>
+<?= $this->headLink()->appendStylesheet($this->baseUrl.'/public/css/common.css')
+->appendStylesheet($this->baseUrl.'/public/css/admin/admin.css');
+$this->dojo()->setLocalPath($this->baseUrl.'/public/dojo/dojo/dojo.js')
+->addStyleSheetModule('dijit.themes.nihilo')
+->addLayer($this->baseUrl.'/public/dojo/dojo/dojo-ui.js');
+echo $this->dojo();
+Zend_Dojo_View_Helper_Dojo::setUseProgrammatic();
+?>
+
+<script type="text/javascript">
+var baseUrl = '<?= $this->escape($this->baseUrl); ?>';
+var defaultAjaxTimeout = 800;
+</script>
+</head>
+<body class="nihilo">
+<div id="loadingJSResources" style="display: none;">
+<h1><span class="icon"></span> <?= $this->translate('loadingJavascriptResources')?></h1>
+</div>
+<script type="text/javascript"> document.getElementById('loadingJSResources').style.display=''; </script>
+<div id="extraDiv1"><span></span></div>
+<div id="extraDiv2"><span></span></div>
+<div id="extraDiv3"><span></span></div>
+<div id="container"><!-- container -->
+<div id="extraDiv4"><span></span></div>
+<div id="extraDiv5"><span></span></div>
+<div id="extraDiv6"><span></span></div>
+<div id="extraDiv7"><span></span></div>
+<div id="extraDiv8"><span></span></div>
+<div id="header"><!-- header -->
+<div id="logo"></div>
+<div id="topMenu"><!-- topMenu --> <!-- topMenu --></div>
+<!-- header --></div>
+<div id="column1"><!-- column1 --> <?= $this->layout()->leftMenu ?> <!-- column1 --></div>
+
+<div id="column2"><!-- column2 -->
+<?= $this->partial('messaging.phtml',Zend_Controller_Action_HelperBroker::getStaticHelper('Messages')->getMessages()) ?>
+<?= $this->layout()->content ; ?>
+<!-- column2 --></div>
+
+<div id="column3"><!-- column3 --> <?= $this->layout()->column3 ; ?> <!-- column3 --></div>
+
+<div id="column4"><!-- column4 --> <?= $this->layout()->column4 ; ?> <!-- column4 --></div>
+
+<div id="footer"><!-- footer --><!-- footer --></div>
+<!-- container --></div>
+<div id="extraDiv9"><span></span></div>
+<div id="extraDiv10"><span></span></div>
+<div id="extraDiv11"><span></span></div>
+<div id="extraDiv12"><span></span></div>
+<script type="text/javascript">
+djConfig = {
+extraLocale: ['en']
+}
+</script>
+<?= $this->headScript()
+->prependFile($this->baseUrl.'/public/js/admin/common.js')
+?>
+</body>
+</html>

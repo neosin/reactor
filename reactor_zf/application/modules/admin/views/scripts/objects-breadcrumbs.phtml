@@ -1,0 +1,14 @@
+<?
+$i = 0;
+$total = $this->breadcrumbs->count();
+foreach($this->breadcrumbs as $crumb):?>
+<? $this->config['object'] = $crumb->id;
+++$i; ?>
+<? if($total>$i): ?>
+<span class="breadcrumb"><a
+	href="<?= $this->url($this->config[0],$this->config[1],$this->config[2]); ?>"><?= $this->escape($crumb->title); ?></a>
+&raquo;</span>
+<? else: ?>
+<span class="breadcrumb"><strong><?= $this->escape($crumb->title); ?></strong></span>
+<? endif; ?>
+<? endforeach;?>

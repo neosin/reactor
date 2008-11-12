@@ -13,5 +13,9 @@ class User extends Zend_Db_Table_Row{
         }
         parent::findUsersRoles();
     }
+    
+    public function isAllowed(){
+        #stub
+    }
 }
 ?>

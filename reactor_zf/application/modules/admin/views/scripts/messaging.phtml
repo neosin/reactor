@@ -1,0 +1,9 @@
+<div class="messageBox">
+<? foreach ($this->getVars() as $key => $type): ?>
+<ul class="<?= $key ?>">
+<? foreach($type as $msg): ?>
+<li><?= $this->translate($msg); ?></li>
+<? endforeach; ?>
+</ul>
+<? endforeach; ?>
+</div>

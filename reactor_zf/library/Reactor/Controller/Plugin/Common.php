@@ -11,14 +11,14 @@ class Reactor_Controller_Plugin_Common extends Zend_Controller_Plugin_Abstract
 		$config = Zend_Registry::get('config');
 		Zend_Db_Table_Abstract::setDefaultMetadataCache(Zend_Registry::get('cache'));
 		$db = Zend_Db::factory($config->setup->database->adapter,$config->setup->database->config->toArray());
-		//TODO did they implement that in 1.7 or still we have to wait :/
+		#TODO did they implement that in 1.7 or still we have to wait :/
 		$db->query("SET NAMES 'UNICODE'");
-		//start up the profiler if needed
+		#start up the profiler if needed
 		if($config->setup->database->profiler == true){
 			$db->getProfiler()->setEnabled($config->setup->database->profiler);
 		}
 		Zend_Db_Table::setDefaultAdapter($db);
-		//TODO database driven sessions - maybe we want to change that in future ? for better scaling ? 
+		#TODO database driven sessions - maybe we want to change that in future ? for better scaling ? 
 		Zend_Session::setSaveHandler(new Zend_Session_SaveHandler_DbTable(array(
 		'name' => 'session',
 		'primary'=> 'id',
@@ -38,7 +38,8 @@ class Reactor_Controller_Plugin_Common extends Zend_Controller_Plugin_Abstract
 		$this->locale = new Zend_Locale($config->setup->defaultLocale);
 		Zend_Registry::set('Zend_Locale', $this->locale);
 		Zend_Translate::setCache(Zend_Registry::get('cache'));
-		Zend_Registry::set('Zend_Translate', new Zend_Translate('gettext', './data/locales/pl/default.mo', 'pl'));
+		#TODO disable at current state
+		#Zend_Registry::set('Zend_Translate', new Zend_Translate('gettext', './data/locales/pl/default.mo', 'pl'));
 	}
 
 	public function dispatchLoopStartup(Zend_Controller_Request_Abstract $request)
