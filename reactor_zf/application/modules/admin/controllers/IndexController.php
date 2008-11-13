@@ -16,12 +16,14 @@ class Admin_IndexController extends Reactor_Controller_Action_Admin
 	}
 
 	public function indexAction(){
-
+	    die('index');
 	}
 
 	public function logInAction(){
+
 	}
 	public function logOutAction(){
+	    die('logOut');
 	}
 }
 ?>
