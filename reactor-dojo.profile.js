@@ -3,13 +3,10 @@ dependencies = {
 		{
 			name: "dojo.js",
 		        dependencies: [
-				"dojo.dnd",
 				"dojo.fx",
 				"dojo.NodeList-fx",
 				"dojo.fx.easing",
-				"dijit.TitlePane",
-				"dijit.Tooltip",
-				"dojox.image.Lightbox"
+				"dijit.Tooltip"
 				    ]
 		},
 		{
@@ -28,6 +25,7 @@ dependencies = {
 		{
 			name: "dojo-ui.js",
 			dependencies: [
+				"dojo.dnd",
 				"dijit.Dialog",
 				"dijit.Editor",
 				"dijit.form.DateTextBox",
