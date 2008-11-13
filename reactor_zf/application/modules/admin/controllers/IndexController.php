@@ -20,7 +20,8 @@ class Admin_IndexController extends Reactor_Controller_Action_Admin
 	}
 
 	public function logInAction(){
-
+	    Zend_Layout::getMvcInstance()->disableLayout();
+	     $this->view->formLogIn = new Reactor_Form_LogIn();
 	}
 	public function logOutAction(){
 	    die('logOut');

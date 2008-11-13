@@ -1,5 +1,46 @@
-<?php 
+<?php
+echo $this->doctype('XHTML1_STRICT');?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<?= $this->headTitle($this->translate('administration'));?>
+<?= $this->headMeta()->appendName('keywords', 'cms system')
+->appendName('Content-Type', 'text/html; charset=utf-8')
+->appendName('robots', 'all')
+->appendName('revisit-after', '2 days')
+->appendName('Pragma', 'cache');
+?>
+<?= $this->headLink()->appendStylesheet($this->baseUrl.'/public/css/common.css')
+->appendStylesheet($this->baseUrl.'/public/css/admin/admin.css');
+$this->dojo()->setLocalPath($this->baseUrl.'/public/dojo/dojo/dojo.js')
+->addStyleSheetModule('dijit.themes.nihilo')
+->addLayer($this->baseUrl.'/public/dojo/dojo/dojo-ui.js');
+echo $this->dojo();
+Zend_Dojo_View_Helper_Dojo::setUseProgrammatic();
+?>
+
+<script type="text/javascript">
+var baseUrl = '<?= $this->escape($this->baseUrl); ?>';
+var defaultAjaxTimeout = 800;
+</script>
+</head>
+<body class="nihilo">
+<div id="loadingJSResources" style="display: none;">
+<h1><span class="icon"></span> <?= $this->translate('loadingJavascriptResources')?></h1>
+</div>
+<script type="text/javascript"> document.getElementById('loadingJSResources').style.display=''; </script>
+<div id="extraDiv1"><span></span></div>
+<div id="extraDiv2"><span></span></div>
+<div id="extraDiv3"><span></span></div>
+<div id="container"><!-- container -->
+<?= $this->formLogIn; ?>
+<!-- container --></div>
+<div id="extraDiv4"><span></span></div>
+<div id="extraDiv5"><span></span></div>
+<?= $this->headScript()
+->prependFile($this->baseUrl.'/public/js/admin/common.js')
+?>
+</body>
+</html>
+<?
 $this->headScript()->appendFile($this->baseUrl.'/public/js/admin/index/log-in.js');
-echo $this->loginForm;
-?> 
-Login
+?>

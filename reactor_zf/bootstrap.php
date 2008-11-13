@@ -100,13 +100,13 @@ if($config->setup->debug == 'true'){
 		$i=0;
 		if(!empty($queries)){
 			foreach($queries as $query){
-				echo '<div class="debugQuery">'. ++$i.'. '. $query->getQuery() . '</div>';
+				echo '<div class="debug">'. ++$i.'. '. $query->getQuery() . '</div>';
 			}
 		}
-		echo '<div class="debugQuery">' . substr((microtime(true)-$xstart),0,5) . '| queries: '. $profiler->getTotalNumQueries() .'| total query time : '.substr($profiler->getTotalElapsedSecs(),0,5).'s, ZF version:<strong>'. Zend_Version::VERSION . '</strong></div>';
+		echo '<div class="debug>' . substr((microtime(true)-$xstart),0,5) . '| queries: '. $profiler->getTotalNumQueries() .'| total query time : '.substr($profiler->getTotalElapsedSecs(),0,5).'s, ZF version:<strong>'. Zend_Version::VERSION . '</strong></div>';
 	}
 	else{
-		echo '<div class="debugQuery">' . substr((microtime(true)-$xstart),0,5) . 's, ZF version: ,<strong>'. Zend_Version::VERSION . '</strong></div>';
+		echo '<div class="debug">' . substr((microtime(true)-$xstart),0,5) . 's, ZF version: ,<strong>'. Zend_Version::VERSION . '</strong></div>';
 	}
 }
 ?>

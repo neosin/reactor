@@ -3,7 +3,7 @@ class Reactor_Form_LogIn extends Zend_Form{
     public function init(){
         $config = Zend_Registry::get('config');
         $this->setName('loginForm');
-        $this->setTranslator(Zend_Registry::get('Zend_Translate'));
+        #$this->setTranslator(Zend_Registry::get('Zend_Translate'));
         $this->setMethod('post');
         $this->setAttrib('enctype','multipart/form-data');
         $this->setAction(Zend_Controller_Action_HelperBroker::getStaticHelper('url')->url(array('action'=>'log-in'),'admin'));
