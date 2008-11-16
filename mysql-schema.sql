@@ -7,7 +7,7 @@ CREATE TABLE roles
   id integer NOT NULL auto_increment,
   name character varying(100) NOT NULL,
   description text NOT NULL,
-  users integer NOT NULL DEFAULT 0,
+  users_total integer NOT NULL DEFAULT 0,
   CONSTRAINT roles_pkey PRIMARY KEY (id)
 ) ENGINE InnoDB CHARACTER SET=utf8;
 --query--
@@ -412,14 +412,15 @@ CREATE TABLE users_roles
 --query--
 SET FOREIGN_KEY_CHECKS=1
 --query--
-INSERT INTO site_objects (id, title, parent_id, ordering) VALUES
-(1, 'a', NULL, 100),
-(2, 'b', NULL, 200),
-(3, 'c', 1, 300),
-(4, 'd', 2, 400),
-(5, 'e', 3, 500),
-(6, 'f', 3, 600),
-(7, 'g', 3, 700),
-(8, 'h', 6, 800),
-(9, 'i', 7, 900),
-(10, 'j', 8, 1000);
+INSERT INTO roles (id,name,description,users_total) VALUES(1,'Unregistered','Everyone belongs to this group + anonymous user',0);
+--query--
+INSERT INTO roles (id,name,description,users_total) VALUES(2,'Administrators','Administrators',1);
+--query--
+INSERT INTO roles (id,name,description,users_total) VALUES(3,'Registered users','Everyone belongs to this group',1);
+--query--
+INSERT INTO users (id,username,password,email) VALUES(1,'test',MD5('test'),'test@test.com');
+--query--
+INSERT INTO users_roles (user,role) VALUES(1,2);
+--query--
+INSERT INTO site_objects (id, title, parent_id, ordering,owner,depth,lft,rgt) VALUES
+(1, 'Root Object', NULL, 100,1,1,1,2);

@@ -1,8 +1,8 @@
 <?php
 //sample test
 $root = realpath(dirname(__FILE__));
-set_include_path($root.'/../library' . PATH_SEPARATOR . '.' . PATH_SEPARATOR
-. PATH_SEPARATOR . $root.'/../application'
+set_include_path($root.'/../reactor_zf/library' . PATH_SEPARATOR . '.' . PATH_SEPARATOR
+. PATH_SEPARATOR . $root.'/../reactor_zf/application'
 . PATH_SEPARATOR . get_include_path());
 
 include_once 'Zend/Acl.php';

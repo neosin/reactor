@@ -1,8 +1,8 @@
 <?php
 //sample test
 $root = realpath(dirname(__FILE__));
-set_include_path($root.'/../library' . PATH_SEPARATOR . '.' . PATH_SEPARATOR
-. PATH_SEPARATOR . $root.'/../application'
+set_include_path($root.'/../reactor_zf/library' . PATH_SEPARATOR . '.' . PATH_SEPARATOR
+. PATH_SEPARATOR . $root.'/../reactor_zf/application'
 . PATH_SEPARATOR . get_include_path());
 
 include_once 'Zend/Acl.php';
@@ -18,20 +18,25 @@ include_once 'Zend/Db/Table/Rowset.php';
 include_once 'Zend/Db/Table/Row.php';
 include_once 'Zend/Db/Table/Select.php';
 
-$dbEngine = 'PDO_MYSQL';
 $results = array();
 $queries = array();
+#config
+$dbEngine = 'PDO_PGSQL';
+$username = "test";
+$password = "test";
+$dbname = "reactor";
+$host = "localhost";
 try{
-    $db = Zend_Db::factory($dbEngine,array('username' => "test",'password' => "test", 'dbname' => "reactor",'host' => "localhost"));
+    $db = Zend_Db::factory($dbEngine,array('username' => $username,'password' => $password, 'dbname' => $dbname,'host' => $host));
     Zend_Db_Table::setDefaultAdapter($db);
 
     switch ($dbEngine) {
         case 'PDO_PGSQL':
-            $sql = file_get_contents('../../postgresql-schema.sql');
+            $sql = file_get_contents('../postgresql-schema.sql');
             $db->query("SET NAMES 'UNICODE'");
             break;
         default:
-            $sql = file_get_contents('../../mysql-schema.sql');
+            $sql = file_get_contents('../mysql-schema.sql');
             $db->query("SET NAMES 'utf8'");
             break;
     }
