@@ -1,0 +1,42 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Cms\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-11-16 14:29+0100\n"
+"PO-Revision-Date: 2008-11-16 14:29+0100\n"
+"Last-Translator: Marcin <info@webreactor.eu>\n"
+"Language-Team: WebReactor <info@webreactor.eu>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: English\n"
+"X-Poedit-Country: UNITED KINGDOM\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: ../../../../../\n"
+"X-Poedit-KeywordsList: translate();translate;_()\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: reactor_zf/application/forms/LogIn.php:14
+msgid "f_username"
+msgstr "Username"
+
+#: reactor_zf/application/forms/LogIn.php:25
+msgid "f_password"
+msgstr "Password"
+
+#: reactor_zf/application/forms/LogIn.php:35
+msgid "f_sign_in"
+msgstr "Sign in"
+
+#: reactor_zf/application/layouts/default.phtml:5
+#: reactor_zf/application/layouts/administration.phtml:5
+#: reactor_zf/application/modules/admin/views/scripts/index/log-in.phtml:5
+msgid "administration"
+msgstr "Administration"
+
+#: reactor_zf/application/layouts/default.phtml:28
+#: reactor_zf/application/layouts/administration.phtml:28
+#: reactor_zf/application/modules/admin/views/scripts/index/log-in.phtml:28
+msgid "loadingJavascriptResources"
+msgstr "Loading Javascript resources"
+

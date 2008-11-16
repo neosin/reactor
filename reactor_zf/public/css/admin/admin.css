@@ -1,0 +1,69 @@
+@CHARSET "UTF-8";
+/* defaults */
+body{
+	font-family: verdana, arial, georgia, sans-serif;
+	text-align: center;
+	background-color: #333333;
+	background-image: url("../../images/admin/reactor_admin_bg.jpg");
+	background-repeat: no-repeat;
+	color: #ffffff;
+	font-size: 1em;
+}
+
+#container{
+	text-align: justify;
+	width: 95%;
+	margin: auto;
+	position: relative;
+}
+
+#loginForm input{
+	width: 220px;
+}
+
+label{
+	font-size: 0.75em;
+}
+
+input, textarea, button, select{
+	border: 2px solid #bbbbbb;
+	margin: 2px 0px 2px 0px;
+	background-color: #eeeeee;
+	color: #333333;
+}
+
+input:hover, textarea:hover, select:hover{
+	border: 2px solid #ff0000;
+	margin: 2px 0px 2px 0px;
+	background-color: #ffffff;
+	color: #000000;
+	font-weight: bold;
+}
+
+button:hover{
+	border: 2px solid #00cc00;
+	margin: 2px 0px 2px 0px;
+	background-color: #ffffff;
+	color: #000000;
+}
+
+/* login page */
+#extraDiv4.loginLogo{
+	width: 250px;
+	margin:25% auto auto auto;
+	height: 73px;
+	background-image: url("../../images/admin/reactor_login_layer_logo.png");
+	background-repeat: no-repeat;
+	display: block;
+}
+
+#loginForm{
+	width: 250px;
+	margin: auto;
+	background-color: #444444;
+	border-width: 3px 1px 1px 1px;
+	border-style: solid;
+	border-color: #6b5850;
+	padding: 10px;
+}
+/* login page */
