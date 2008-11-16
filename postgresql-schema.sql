@@ -406,13 +406,17 @@ CREATE TABLE users_roles
       ON UPDATE NO ACTION ON DELETE CASCADE
 );
 --query--
-INSERT INTO roles (id,name,description,users_total) VALUES(1,'Unregistered','Everyone belongs to this group + anonymous user',0);
+INSERT INTO roles (id,name,description,users_total) VALUES(1,'Anonymous','Everyone belongs to this group',0);
 --query--
 INSERT INTO roles (id,name,description,users_total) VALUES(2,'Administrators','Administrators',1);
 --query--
 INSERT INTO roles (id,name,description,users_total) VALUES(3,'Registered users','Everyone belongs to this group',1);
 --query--
+INSERT INTO users (id,username,password,email) VALUES(0,'anonymous','','anonymous');
+--query--
 INSERT INTO users (id,username,password,email) VALUES(1,'test',MD5('test'),'test@test.com');
+--query--
+INSERT INTO users_roles ("user",role) VALUES(0,1);
 --query--
 INSERT INTO users_roles ("user",role) VALUES(1,2);
 --query--

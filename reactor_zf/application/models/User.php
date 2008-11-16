@@ -8,10 +8,8 @@ class User extends Zend_Db_Table_Row{
     }
     
     public function findUsersRoles(){
-        if($this->id == null){
-            return array();
-        }
-        parent::findUsersRoles();
+        #TODO add caching later
+        return parent::findUsersRoles();
     }
     
     public function isAllowed(){

@@ -3,7 +3,7 @@ class Reactor_Form_LogIn extends Zend_Form{
     public function init(){
         $translate = Zend_Registry::get('Zend_Translate');
         $config = Zend_Registry::get('config');
-        $this->setName('loginForm');
+        $this->setName('signInForm');
         $this->setTranslator($translate);
         $this->setMethod('post');
         $this->setAttrib('enctype','multipart/form-data');

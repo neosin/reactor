@@ -39,7 +39,7 @@ include_once 'Reactor/Controller/Plugin/Common.php';
 include_once 'Reactor/DbTable.php';
 include_once 'Reactor/Image.php';
 include_once 'forms/SimpleConfimation.php';
-include_once 'forms/LogIn.php';
+include_once 'forms/SignInForm.php';
 #include_once 'models/Object.php';
 #include_once 'models/Object/Foundation.php';
 #include_once('models/Object/Document.php');
@@ -78,6 +78,7 @@ Zend_Registry::set('config',$config);
 //error handling
 if($config->setup->debug){
 	error_reporting(E_ALL|E_STRICT);
+	include_once 'Zend/Debug.php';
 }
 else{
 	error_reporting(0);

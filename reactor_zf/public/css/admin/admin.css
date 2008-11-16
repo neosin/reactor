@@ -17,10 +17,6 @@ body{
 	position: relative;
 }
 
-#loginForm input{
-	width: 220px;
-}
-
 label{
 	font-size: 0.75em;
 }
@@ -57,7 +53,7 @@ button:hover{
 	display: block;
 }
 
-#loginForm{
+#signInForm{
 	width: 250px;
 	margin: auto;
 	background-color: #444444;
@@ -65,5 +61,18 @@ button:hover{
 	border-style: solid;
 	border-color: #6b5850;
 	padding: 10px;
+}
+
+#signInForm input{
+	width: 220px;
+}
+
+#signInForm .errors{
+	font-size: 0.70em;
+	color: #ff8888;
+	padding: 3px;
+	margin: 3px;
+	list-style: disc;
+	list-style-position: inside;
 }
 /* login page */

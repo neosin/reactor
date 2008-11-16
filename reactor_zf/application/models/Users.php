@@ -15,20 +15,26 @@ class Users extends Zend_Db_Table{
         $result = $authAdapter->authenticate();
         if($result->isValid()){
             $userData = (array)$authAdapter->getResultRowObject();
-            $auth->getStorage()->write($userData);
         }
+        else{
+            $userData = $this->find(0)->current()->toArray();
+        }
+        $auth->getStorage()->write($userData);
         return $this->recreateUserSession($sessionName);
     }
 
     public function recreateUserSession($sessionName = 'userSessionName'){
         $auth = Zend_Auth::getInstance();
         $auth->setStorage(new Zend_Auth_Storage_Session($sessionName));
-        if($auth->getIdentity()){
-            $userData = $auth->getStorage();
-            $user = $this->createRow($userData->read());
+        
+        if($userData = $auth->getIdentity()){
+            $user = $this->createRow($userData);
         }
         else{
-            $user = $this->createRow();
+            $user = $this->find(0)->current();
+        }
+        if($user->id < 1){
+            $user->setReadOnly(true);
         }
         return $user;
     }
