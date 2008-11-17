@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS roles CASCADE;
---query--
+-- query --
 CREATE TABLE roles
 (
   id serial NOT NULL,
@@ -8,9 +8,9 @@ CREATE TABLE roles
   users_total integer NOT NULL DEFAULT 0,
   CONSTRAINT roles_pkey PRIMARY KEY (id)
 );
---query--
+-- query --
 DROP TABLE IF EXISTS site_objects CASCADE;
---query--
+-- query --
 CREATE TABLE site_objects
 (
   id serial NOT NULL,
@@ -48,29 +48,29 @@ CREATE TABLE site_objects
   CONSTRAINT tree_lft UNIQUE (lft),
   CONSTRAINT ree_rgt UNIQUE (rgt)
 );
---query--
+-- query --
 CREATE INDEX creation_date
   ON site_objects
   USING btree
   (creation_time);
---query--
+-- query --
 CREATE INDEX object_status
   ON site_objects
   USING btree
   (status);
---query--
+-- query --
 CREATE INDEX object_title
   ON site_objects
   USING btree
   (title);
---query--
+-- query --
 CREATE INDEX publishing_dates
   ON site_objects
   USING btree
   (publish_start, publish_end);
---query--
+-- query --
 DROP TABLE IF EXISTS users CASCADE;
---query--
+-- query --
 CREATE TABLE users
 (
   id serial NOT NULL,
@@ -116,39 +116,39 @@ CREATE TABLE users
   postal_number character varying(20),
   CONSTRAINT users_pkey PRIMARY KEY (id)
 );
---query--
+-- query --
 CREATE UNIQUE INDEX unique_email
   ON users
   USING btree
   (lower(email::text));
---query--
+-- query --
 CREATE UNIQUE INDEX unique_username
   ON users
   USING btree
   (lower(username::text));
---query--
+-- query --
 CREATE INDEX user_birthday
   ON users
   USING btree
   (birthday_date);
---query--
+-- query --
 CREATE INDEX user_gender
   ON users
   USING btree
   (gender_is_male);
---query--
+-- query --
 CREATE INDEX user_status
   ON users
   USING btree
   (status);
---query--
+-- query --
 CREATE INDEX user_warnings
   ON users
   USING btree
   (warnings);
---query--
+-- query --
 DROP TABLE IF EXISTS acl CASCADE;
---query--
+-- query --
 CREATE TABLE acl
 (
   object integer NOT NULL DEFAULT 0,
@@ -159,9 +159,9 @@ CREATE TABLE acl
       REFERENCES roles (id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE CASCADE
 );
---query--
+-- query --
 DROP TABLE IF EXISTS clients CASCADE;
---query--
+-- query --
 CREATE TABLE clients
 (
   id serial NOT NULL,
@@ -199,21 +199,21 @@ CREATE TABLE clients
   sending_country character varying(50),
   CONSTRAINT clients_pkey PRIMARY KEY (id)
 );
---query--
+-- query --
 CREATE INDEX clients_name
   ON clients
   USING btree
   (name);
---query--
+-- query --
 DROP TABLE IF EXISTS clients_users_bindings CASCADE;
---query--
+-- query --
   CREATE TABLE clients_users_bindings
 (
   temporary_table character varying(255)
 );
---query--
+-- query --
 DROP TABLE IF EXISTS document_files CASCADE;
---query--
+-- query --
 CREATE TABLE document_files
 (
   object integer NOT NULL DEFAULT 0,
@@ -229,14 +229,14 @@ CREATE TABLE document_files
       REFERENCES site_objects (id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE CASCADE
 );
---query--
+-- query --
 CREATE INDEX object_idx2
   ON document_files
   USING btree
   (object);
---query--
+-- query --
 DROP TABLE IF EXISTS document_pages CASCADE;
---query--
+-- query --
 CREATE TABLE document_pages
 (
   object integer NOT NULL DEFAULT 0,
@@ -253,14 +253,14 @@ CREATE TABLE document_pages
       REFERENCES site_objects (id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE CASCADE
 );
---query--
+-- query --
 CREATE INDEX page_object_sorting_index
   ON document_pages
   USING btree
   (object, sort);
---query--
+-- query --
 DROP TABLE IF EXISTS gallery_images CASCADE;
---query--
+-- query --
 CREATE TABLE gallery_images
 (
   id serial NOT NULL,
@@ -275,66 +275,66 @@ CREATE TABLE gallery_images
   creation_date timestamp without time zone NOT NULL DEFAULT now(),
   CONSTRAINT gallery_images_pkey PRIMARY KEY (id)
 );
---query--
+-- query --
 CREATE INDEX image_insert_time
   ON gallery_images
   USING btree
   (creation_date);
---query--
+-- query --
 CREATE INDEX image_onwer
   ON gallery_images
   USING btree
   (owner);
---query--
+-- query --
 CREATE INDEX image_title
   ON gallery_images
   USING btree
   (title);
---query--
+-- query --
 DROP TABLE IF EXISTS garbage_collection_files CASCADE;
---query--
+-- query --
 CREATE TABLE garbage_collection_files
 (
   file_location text NOT NULL
 );
---query--
+-- query --
 DROP TABLE IF EXISTS messages CASCADE;
---query--
+-- query --
 CREATE TABLE messages
 (
   temporary_table character varying(255)
 );
---query--
+-- query --
 DROP TABLE IF EXISTS messages_flow CASCADE;
---query--
+-- query --
 CREATE TABLE messages_flow
 (
   temporary_table character varying(255)
 );
---query--
+-- query --
 DROP TABLE IF EXISTS products CASCADE;
---query--
+-- query --
 CREATE TABLE products
 (
   temporary_table character varying(255)
 );
---query--
+-- query --
 DROP TABLE IF EXISTS products_properties CASCADE;
---query--
+-- query --
 CREATE TABLE products_properties
 (
   temporary_table character varying(255)
 );
---query--
+-- query --
 DROP TABLE IF EXISTS products_propery_values CASCADE;
---query--
+-- query --
 CREATE TABLE products_propery_values
 (
   temporary_table character varying(255)
 );
---query--
+-- query --
 DROP TABLE IF EXISTS session CASCADE;
---query--
+-- query --
 CREATE TABLE session
 (
   id character(32) NOT NULL,
@@ -343,30 +343,30 @@ CREATE TABLE session
   data text,
   CONSTRAINT session_pkey PRIMARY KEY (id)
 );
---query--
+-- query --
 DROP TABLE IF EXISTS task_asignees CASCADE;
---query--
+-- query --
 CREATE TABLE task_asignees
 (
   temporary_table character varying(255)
 );
---query--
+-- query --
 DROP TABLE IF EXISTS task_steps CASCADE;
---query--
+-- query --
 CREATE TABLE task_steps
 (
   temporary_table character varying(255)
 );
---query--
+-- query --
 DROP TABLE IF EXISTS tasks CASCADE;
---query--
+-- query --
 CREATE TABLE tasks
 (
   temporary_table character varying(255)
 );
---query--
+-- query --
 DROP TABLE IF EXISTS user_phones CASCADE;
---query--
+-- query --
 CREATE TABLE user_phones
 (
   "user" integer NOT NULL DEFAULT 0,
@@ -377,9 +377,9 @@ CREATE TABLE user_phones
       REFERENCES users (id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE CASCADE
 );
---query--
+-- query --
 DROP TABLE IF EXISTS users_ims CASCADE;
---query--
+-- query --
 CREATE TABLE users_ims
 (
   "user" integer NOT NULL DEFAULT 0,
@@ -390,9 +390,9 @@ CREATE TABLE users_ims
       REFERENCES users (id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE CASCADE
 );
---query--
+-- query --
 DROP TABLE IF EXISTS users_roles CASCADE;
---query--
+-- query --
 CREATE TABLE users_roles
 (
   "user" integer NOT NULL DEFAULT 0,
@@ -405,20 +405,20 @@ CREATE TABLE users_roles
       REFERENCES users (id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE CASCADE
 );
---query--
+-- query --
 INSERT INTO roles (id,name,description,users_total) VALUES(1,'Anonymous','Everyone belongs to this group',0);
---query--
+-- query --
 INSERT INTO roles (id,name,description,users_total) VALUES(2,'Administrators','Administrators',1);
---query--
+-- query --
 INSERT INTO roles (id,name,description,users_total) VALUES(3,'Registered users','Everyone belongs to this group',1);
---query--
+-- query --
 INSERT INTO users (id,username,password,email) VALUES(1,'anonymous','','anonymous');
---query--
+-- query --
 INSERT INTO users (id,username,password,email) VALUES(2,'test',MD5('test'),'test@test.com');
---query--
+-- query --
 INSERT INTO users_roles ("user",role) VALUES(1,1);
---query--
+-- query --
 INSERT INTO users_roles ("user",role) VALUES(2,2);
---query--
+-- query --
 INSERT INTO site_objects (id, title, parent_id, ordering,owner,depth,lft,rgt) VALUES
 (1, 'Root Object', NULL, 100,1,1,1,2);

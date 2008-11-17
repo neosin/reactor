@@ -40,7 +40,7 @@ try{
             $db->query("SET NAMES 'utf8'");
             break;
     }
-    $queries = explode('--query--',$sql);
+    $queries = explode('-- query --',$sql);
 
     
     if (isset($_GET['install'])){
