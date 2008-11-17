@@ -4,7 +4,7 @@ class User extends Zend_Db_Table_Row{
         $auth = Zend_Auth::getInstance();
         $auth->setStorage(new Zend_Auth_Storage_Session($sessionName));
         $auth->clearIdentity();
-        $this->setFromArray($this->getTable()->createRow()->toArray());
+        $this->getTable()->recreateUserSession($sessionName);
     }
     
     public function findUsersRoles(){

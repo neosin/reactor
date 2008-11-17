@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cms\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-16 14:29+0100\n"
-"PO-Revision-Date: 2008-11-16 14:29+0100\n"
+"POT-Creation-Date: 2008-11-17 18:24+0100\n"
+"PO-Revision-Date: 2008-11-17 18:24+0100\n"
 "Last-Translator: Marcin <info@webreactor.eu>\n"
 "Language-Team: WebReactor <info@webreactor.eu>\n"
 "MIME-Version: 1.0\n"
@@ -16,17 +16,21 @@ msgstr ""
 "X-Poedit-KeywordsList: translate();translate;_()\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: reactor_zf/application/forms/LogIn.php:14
+#: reactor_zf/application/forms/SignInForm.php:14
 msgid "f_username"
 msgstr "Username"
 
-#: reactor_zf/application/forms/LogIn.php:25
+#: reactor_zf/application/forms/SignInForm.php:25
 msgid "f_password"
 msgstr "Password"
 
-#: reactor_zf/application/forms/LogIn.php:35
+#: reactor_zf/application/forms/SignInForm.php:35
 msgid "f_sign_in"
 msgstr "Sign in"
+
+#: reactor_zf/application/modules/admin/controllers/IndexController.php:39
+msgid "o_signed_in"
+msgstr "Signed In successfully"
 
 #: reactor_zf/application/layouts/default.phtml:5
 #: reactor_zf/application/layouts/administration.phtml:5
@@ -39,4 +43,7 @@ msgstr "Administration"
 #: reactor_zf/application/modules/admin/views/scripts/index/log-in.phtml:28
 msgid "loadingJavascriptResources"
 msgstr "Loading Javascript resources"
+
+#~ msgid "o_logged_in"
+#~ msgstr "Signed in successfully"
 

@@ -15,11 +15,12 @@ class Admin_IndexController extends Reactor_Controller_Action_Admin
     }
 
     public function indexAction(){
-
+        Zend_Layout::getMvcInstance()->enableLayout();
+        $this->render('index','default');
     }
 
     public function logInAction(){
-    	$users = Zend_Registry::get('Reactor_User');
+        $users = Zend_Registry::get('Reactor_User');
         $user = $users->recreateUserSession('admin_session');
         //we dont need/want default admin layout here lets just render view for login screen
         Zend_Layout::getMvcInstance()->disableLayout();
@@ -34,11 +35,16 @@ class Admin_IndexController extends Reactor_Controller_Action_Admin
                 if($user->id > 0){
                 }
             }
+            $_POST = null;
+            $this->getHelper('Messages')->operations = Zend_Registry::get('Zend_Translate')->_('o_signed_in');
+            $this->_forward('index','index','admin');
         }
     }
 
     public function logOutAction(){
-        die('logOut');
+        $user = Zend_Registry::get('Reactor_User')->recreateUserSession('admin_session');
+        $user->clear('admin_session');
+        $this->_forward('index','index','admin');
     }
 }
 ?>

@@ -76,3 +76,47 @@ button:hover{
 	list-style-position: inside;
 }
 /* login page */
+
+/* notifications */
+
+.operations li{
+	background-color: #DAFFE5;
+	border: 1px solid #25A24B;
+	color: #25A24B;
+	font-size: 0.75em;
+	background-image: url('../../images/icons/accept.png');
+	background-repeat: no-repeat;
+	background-position: 5px 3px;
+	padding: 5px 0px 5px 25px;
+}
+
+.errors li{
+	background-color: #FFECEC;
+	border: 1px solid #B90D0D;
+	color: #B90D0D;
+	font-size: 0.75em;
+	background-image: url('../../images/icons/delete.png');
+	background-repeat: no-repeat;
+	background-position: 5px 3px;
+	padding: 5px 0px 5px 25px;
+}
+
+/* icons */
+
+.icon{
+	background-repeat: no-repeat;
+	width: 16px;
+	height: 16px;
+	display: -moz-inline-box;
+	display: inline-block;
+	vertical-align: top;
+	margin: 0px 5px 0px 5px;
+}
+
+.icon.true{
+	background-image: url('../../images/icons/tick.png');
+}
+
+.icon.false{
+	background-image: url('../../images/icons/cross.png');
+}
