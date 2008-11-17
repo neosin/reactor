@@ -15,11 +15,11 @@ class Admin_IndexController extends Reactor_Controller_Action_Admin
     }
 
     public function indexAction(){
-        die('index');
+
     }
 
     public function logInAction(){
-        $users = new Users();
+    	$users = Zend_Registry::get('Reactor_User');
         $user = $users->recreateUserSession('admin_session');
         //we dont need/want default admin layout here lets just render view for login screen
         Zend_Layout::getMvcInstance()->disableLayout();

@@ -12,7 +12,17 @@ class Reactor_Controller_Plugin_Common extends Zend_Controller_Plugin_Abstract
 		Zend_Db_Table_Abstract::setDefaultMetadataCache(Zend_Registry::get('cache'));
 		$db = Zend_Db::factory($config->setup->database->adapter,$config->setup->database->config->toArray());
 		#TODO did they implement that in 1.7 or still we have to wait :/
-		$db->query("SET NAMES 'UNICODE'");
+		switch ($config->setup->database) {
+			case 'PDO_PGSQL':
+			$db->query("SET NAMES 'UNICODE'");
+			break;
+			case 'PDO_MYSQL':
+			$db->query("SET NAMES 'utf8'");
+			break;
+			default:
+				;
+			break;
+		}
 		#start up the profiler if needed
 		if($config->setup->database->profiler == true){
 			$db->getProfiler()->setEnabled($config->setup->database->profiler);
@@ -40,6 +50,7 @@ class Reactor_Controller_Plugin_Common extends Zend_Controller_Plugin_Abstract
 		Zend_Translate::setCache(Zend_Registry::get('cache'));
 		#TODO currentyl hardcoded
 		Zend_Registry::set('Zend_Translate', new Zend_Translate('gettext', './data/locales/en_GB/LC_MESSAGES/default.mo', 'en'));
+		Zend_Registry::set('Reactor_User',new Users());
 	}
 
 	public function dispatchLoopStartup(Zend_Controller_Request_Abstract $request)

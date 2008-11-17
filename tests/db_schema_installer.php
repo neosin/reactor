@@ -21,7 +21,7 @@ include_once 'Zend/Db/Table/Select.php';
 $results = array();
 $queries = array();
 #config
-$dbEngine = 'PDO_PGSQL';
+$dbEngine = 'PDO_MYSQL';
 $username = "test";
 $password = "test";
 $dbname = "reactor";

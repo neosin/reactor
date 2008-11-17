@@ -418,13 +418,13 @@ INSERT INTO roles (id,name,description,users_total) VALUES(2,'Administrators','A
 --query--
 INSERT INTO roles (id,name,description,users_total) VALUES(3,'Registered users','Everyone belongs to this group',1);
 --query--
-INSERT INTO users (id,username,password,email) VALUES(0,'anonymous','','anonymous');
+INSERT INTO users (id,username,password,email) VALUES(1,'anonymous','','anonymous');
 --query--
-INSERT INTO users (id,username,password,email) VALUES(1,'test',MD5('test'),'test@test.com');
+INSERT INTO users (id,username,password,email) VALUES(2,'test',MD5('test'),'test@test.com');
 --query--
-INSERT INTO users_roles (user,role) VALUES(0,1);
+INSERT INTO users_roles (user,role) VALUES(1,1);
 --query--
-INSERT INTO users_roles (user,role) VALUES(1,2);
+INSERT INTO users_roles (user,role) VALUES(2,2);
 --query--
 INSERT INTO site_objects (id, title, parent_id, ordering,owner,depth,lft,rgt) VALUES
 (1, 'Root Object', NULL, 100,1,1,1,2);

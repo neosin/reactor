@@ -17,7 +17,7 @@ class Users extends Zend_Db_Table{
             $userData = (array)$authAdapter->getResultRowObject();
         }
         else{
-            $userData = $this->find(0)->current()->toArray();
+            $userData = $this->find(1)->current()->toArray();
         }
         $auth->getStorage()->write($userData);
         return $this->recreateUserSession($sessionName);
@@ -31,7 +31,8 @@ class Users extends Zend_Db_Table{
             $user = $this->createRow($userData);
         }
         else{
-            $user = $this->find(0)->current();
+            $user = $this->find(1)->current();
+            $auth->getStorage()->write($user->toArray());
         }
         if($user->id < 1){
             $user->setReadOnly(true);
