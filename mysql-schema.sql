@@ -1,4 +1,4 @@
-SET FOREIGN_KEY_CHECKS=0
+SET FOREIGN_KEY_CHECKS=0;
 --query--
 DROP TABLE IF EXISTS roles CASCADE;
 --query--
@@ -410,7 +410,7 @@ CREATE TABLE users_roles
       ON UPDATE NO ACTION ON DELETE CASCADE
 ) ENGINE InnoDB CHARACTER SET=utf8;
 --query--
-SET FOREIGN_KEY_CHECKS=1
+SET FOREIGN_KEY_CHECKS=1;
 --query--
 INSERT INTO roles (id,name,description,users_total) VALUES(1,'Anonymous','Everyone belongs to this group + anonymous user',0);
 --query--
