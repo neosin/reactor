@@ -12,8 +12,8 @@ class User extends Zend_Db_Table_Row{
         return parent::findUsersRoles();
     }
     
-    public function isAllowed(){
-        #stub
+    public function isAllowed($permissionName, $defaultDeniedMessage = true){
+        return Reactor_Acl::isAllowed($this->findUsersRoles(),Reactor_Acl::ACCESS_ADMIN_SECTION,null,false);
     }
 }
 ?>

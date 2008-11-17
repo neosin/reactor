@@ -9,11 +9,11 @@ echo $this->doctype('XHTML1_STRICT');?>
 ->appendName('revisit-after', '2 days')
 ->appendName('Pragma', 'cache');
 ?>
-<?= $this->headLink()->appendStylesheet($this->baseUrl.'/public/css/common.css')
-->appendStylesheet($this->baseUrl.'/public/css/admin/admin.css');
-$this->dojo()->setLocalPath($this->baseUrl.'/public/dojo/dojo/dojo.js')
+<?= $this->headLink()->appendStylesheet($this->baseUrl.'/css/common.css')
+->appendStylesheet($this->baseUrl.'/css/admin/admin.css');
+$this->dojo()->setLocalPath($this->baseUrl.'/dojo/dojo/dojo.js')
 ->addStyleSheetModule('dijit.themes.nihilo')
-->addLayer($this->baseUrl.'/public/dojo/dojo/dojo-ui.js');
+->addLayer($this->baseUrl.'/dojo/dojo/dojo-ui.js');
 echo $this->dojo();
 Zend_Dojo_View_Helper_Dojo::setUseProgrammatic();
 ?>
@@ -38,10 +38,10 @@ var defaultAjaxTimeout = 800;
 <!-- container --></div>
 <div id="extraDiv5"><span></span></div>
 <?= $this->headScript()
-->prependFile($this->baseUrl.'/public/js/admin/common.js')
+->prependFile($this->baseUrl.'/js/admin/common.js')
 ?>
 </body>
 </html>
 <?
-$this->headScript()->appendFile($this->baseUrl.'/public/js/admin/index/log-in.js');
+$this->headScript()->appendFile($this->baseUrl.'/js/admin/index/log-in.js');
 ?>

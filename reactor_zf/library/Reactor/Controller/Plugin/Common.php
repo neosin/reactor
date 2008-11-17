@@ -39,7 +39,7 @@ class Reactor_Controller_Plugin_Common extends Zend_Controller_Plugin_Abstract
 		$viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
 		$viewRenderer->init();
 		$view = $viewRenderer->view;
-		$view->addHelperPath('./library/Reactor/View/Helper', 'Reactor_View_Helper');
+		$view->addHelperPath('Reactor/View/Helper', 'Reactor_View_Helper');
 		Zend_Dojo::enableView($view);
 		$view->doctype('XHTML1_STRICT');
 		$view->setEncoding('UTF-8');
@@ -49,7 +49,7 @@ class Reactor_Controller_Plugin_Common extends Zend_Controller_Plugin_Abstract
 		Zend_Registry::set('Zend_Locale', $this->locale);
 		Zend_Translate::setCache(Zend_Registry::get('cache'));
 		#TODO currentyl hardcoded
-		Zend_Registry::set('Zend_Translate', new Zend_Translate('gettext', './data/locales/en_GB/LC_MESSAGES/default.mo', 'en'));
+		Zend_Registry::set('Zend_Translate', new Zend_Translate('gettext', '../data/locales/en_GB/LC_MESSAGES/default.mo', 'en'));
 		Zend_Registry::set('Reactor_User',new Users());
 	}
 

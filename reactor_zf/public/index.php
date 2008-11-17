@@ -1,8 +1,8 @@
 <?php
 $xstart = microtime(true);
 $root = realpath(dirname(__FILE__));
-set_include_path($root.'/library' . PATH_SEPARATOR . '.' . PATH_SEPARATOR
-. PATH_SEPARATOR . $root.'/application/'
+set_include_path($root.'/../library' . PATH_SEPARATOR . '.' . PATH_SEPARATOR
+. PATH_SEPARATOR . $root.'/../application/'
 . PATH_SEPARATOR . get_include_path());
 
 // boost for opcode caches
@@ -60,13 +60,13 @@ if (get_magic_quotes_gpc()) {
 	array_walk_recursive($_REQUEST, 'cb_stripslashes');
 }
 
-$cache = Zend_Cache::factory('Core', 'File' , array('automatic_serialization' => true, 'lifetime' => 60*5 ), array('cache_dir' =>'./data/cache'));
+$cache = Zend_Cache::factory('Core', 'File' , array('automatic_serialization' => true, 'lifetime' => 60*5 ), array('cache_dir' =>'../data/cache'));
 //$cache = Zend_Cache::factory('Core', 'Apc' , array('automatic_serialization' => true, 'lifetime' => 60*5 ));
 //$cache->clean(Zend_Cache::CLEANING_MODE_ALL);
 Zend_Registry::set('cache',$cache);
 //configuration
 if(!$config = $cache->load('configuration')){
-	$config = new Zend_Config_Ini('./application/config/config.ini','site');
+	$config = new Zend_Config_Ini('../application/config/config.ini','site');
 	$cache->save($config,'configuration');
 }
 //default date

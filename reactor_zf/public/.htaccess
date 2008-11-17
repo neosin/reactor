@@ -15,4 +15,5 @@ ExpiresByType text/plain A2592000
 ExpiresByType text/css A2592000
 </IfModule>
 
-RewriteEngine off
+RewriteEngine on
+RewriteRule .* index.php

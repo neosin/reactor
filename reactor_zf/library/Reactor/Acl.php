@@ -75,7 +75,7 @@ class Reactor_Acl{
         #setting a role that will be used for testing and will inherit all the priviledges from parent roles
         $acl->addRole(new Zend_Acl_Role('testedRole'),$tmpRoles);
         #query acl
-        $result = $acl->isAllowed('testedRole', $object, $actionId);
+        $result = $acl->isAllowed('testedRole', $object, $permissionName);
         if(!$result && $defaultDeniedMessage){
             $messages = Zend_Controller_Action_HelperBroker::getStaticHelper('Messages');
             $messages->errors = 'e_permission_too_low';
