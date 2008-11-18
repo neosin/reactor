@@ -51,7 +51,7 @@ class Reactor_Acl{
         #resource for test
         $acl->add(new Zend_Acl_Resource($object));
         #caching
-        $permsAvailable = $cache->load(md5($select->__toString()));
+        $permsAvailable = $cache->load(md5(UNIQUE_HASH.$select->__toString()));
         if($permsAvailable === false) {
             $permsAvailable = array();
             #TODO is there a more efficient way to do it instead of casting to array and then casting to object ? 
@@ -59,7 +59,7 @@ class Reactor_Acl{
             foreach($aclResources as $aclResource){
                 array_push($permsAvailable, (object)$aclResource);
             }
-            $cache->save($permsAvailable, md5($select->__toString()), array('acl'));
+            $cache->save($permsAvailable, md5(UNIQUE_HASH.$select->__toString()), array('acl'));
         }
         #setting up permissions for roles
         if($permsAvailable){

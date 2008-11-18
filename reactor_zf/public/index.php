@@ -1,4 +1,7 @@
 <?php
+//change to something random
+define("UNIQUE_HASH",'7v89vgh');
+
 $xstart = microtime(true);
 $root = realpath(dirname(__FILE__));
 set_include_path($root.'/../library' . PATH_SEPARATOR . '.' . PATH_SEPARATOR
@@ -65,10 +68,11 @@ $cache = Zend_Cache::factory('Core', 'File' , array('automatic_serialization' =>
 //$cache->clean(Zend_Cache::CLEANING_MODE_ALL);
 Zend_Registry::set('cache',$cache);
 //configuration
-if(!$config = $cache->load('configuration')){
+if(!$config = $cache->load(UNIQUE_HASH.'configuration')){
 	$config = new Zend_Config_Ini('../application/config/config.ini','site');
-	$cache->save($config,'configuration');
+	$cache->save($config,UNIQUE_HASH.'configuration');
 }
+//setting random hash for things like unique cache identifiers (MANDATORY for servers with APC and multiple instances of software) 
 //default date
 date_default_timezone_set($config->setup->defaultTimezone);
 //default paginator

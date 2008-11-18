@@ -9,7 +9,8 @@ class Reactor_Controller_Plugin_Common extends Zend_Controller_Plugin_Abstract
 	public function routeShutdown(Zend_Controller_Request_Abstract $request)
 	{
 		$config = Zend_Registry::get('config');
-		Zend_Db_Table_Abstract::setDefaultMetadataCache(Zend_Registry::get('cache'));
+		//this is the only place where i want to have another cache instance - for zend_db metadata we should use file cache
+		Zend_Db_Table_Abstract::setDefaultMetadataCache(Zend_Cache::factory('Core', 'File' , array('automatic_serialization' => true, 'lifetime' => 60*5 ), array('cache_dir' =>'../data/cache')));
 		$db = Zend_Db::factory($config->setup->database->adapter,$config->setup->database->config->toArray());
 		#TODO did they implement that in 1.7 or still we have to wait :/
 		switch ($config->setup->database) {
