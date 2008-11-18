@@ -33,7 +33,7 @@ class Reactor_Acl{
     }
 
     static function isAllowed($roles,$permissionName,$object = null, $defaultDeniedMessage = true){
-        $cache = Zend_Registry::get('cache');
+        $cache = Zend_Registry::get('cache_acl');
         $acl = new Zend_Acl();
         #adding all the roles that user has
         $tmpRoles = array();

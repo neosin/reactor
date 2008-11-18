@@ -64,6 +64,7 @@ if (get_magic_quotes_gpc()) {
 }
 
 $cache = Zend_Cache::factory('Core', 'File' , array('automatic_serialization' => true, 'lifetime' => 60*5 ), array('cache_dir' =>'../data/cache'));
+Zend_Registry::set('cache_acl',Zend_Cache::factory('Core', 'File' , array('automatic_serialization' => true, 'lifetime' => 60*5 ), array('cache_dir' =>'../data/cache/acl')));
 //$cache = Zend_Cache::factory('Core', 'Apc' , array('automatic_serialization' => true, 'lifetime' => 60*5 ));
 //$cache->clean(Zend_Cache::CLEANING_MODE_ALL);
 Zend_Registry::set('cache',$cache);
