@@ -1,5 +1,5 @@
 <?php
-//change to something random
+#change to something random
 define("UNIQUE_HASH",'7v89vgh');
 
 $xstart = microtime(true);
@@ -8,7 +8,7 @@ set_include_path($root.'/../library' . PATH_SEPARATOR . '.' . PATH_SEPARATOR
 . PATH_SEPARATOR . $root.'/../application/'
 . PATH_SEPARATOR . get_include_path());
 
-// boost for opcode caches
+# boost for opcode caches
 include_once 'Zend/Acl.php';
 include_once 'Zend/Acl/Role.php';
 include_once 'Zend/Acl/Resource.php';
@@ -52,7 +52,7 @@ include_once 'models/Users.php';
 include_once 'models/User.php';
 include_once 'models/UsersRoles.php';
 
-//shut down magic quotes
+#shut down magic quotes
 if (get_magic_quotes_gpc()) {
 	function cb_stripslashes(&$value, $key) {
 		$value = stripslashes($value);
@@ -62,25 +62,26 @@ if (get_magic_quotes_gpc()) {
 	array_walk_recursive($_COOKIE, 'cb_stripslashes');
 	array_walk_recursive($_REQUEST, 'cb_stripslashes');
 }
-
+#normal file cache
 $cache = Zend_Cache::factory('Core', 'File' , array('automatic_serialization' => true, 'lifetime' => 60*5 ), array('cache_dir' =>'../data/cache'));
-Zend_Registry::set('cache_acl',Zend_Cache::factory('Core', 'File' , array('automatic_serialization' => true, 'lifetime' => 60*5 ), array('cache_dir' =>'../data/cache/acl')));
-//$cache = Zend_Cache::factory('Core', 'Apc' , array('automatic_serialization' => true, 'lifetime' => 60*5 ));
-//$cache->clean(Zend_Cache::CLEANING_MODE_ALL);
+#files is cache that will be used in case stuff that should not get cached into solutions that may use shared memory, for example zend_db metadata or acl( that needs tags ability)
+Zend_Registry::set('cache_files',Zend_Cache::factory('Core', 'File' , array('automatic_serialization' => true, 'lifetime' => 60*10 ), array('cache_dir' =>'../data/cache/acl')));
+#$cache = Zend_Cache::factory('Core', 'Apc' , array('automatic_serialization' => true, 'lifetime' => 60*5 ));
+#$cache->clean(Zend_Cache::CLEANING_MODE_ALL);
 Zend_Registry::set('cache',$cache);
-//configuration
+#configuration
 if(!$config = $cache->load(UNIQUE_HASH.'configuration')){
 	$config = new Zend_Config_Ini('../application/config/config.ini','site');
 	$cache->save($config,UNIQUE_HASH.'configuration');
 }
-//setting random hash for things like unique cache identifiers (MANDATORY for servers with APC and multiple instances of software) 
-//default date
+#setting random hash for things like unique cache identifiers (MANDATORY for servers with APC and multiple instances of software) 
+#default date
 date_default_timezone_set($config->setup->defaultTimezone);
-//default paginator
+#default paginator
 Zend_Paginator::setDefaultScrollingStyle('Sliding');
 Zend_View_Helper_PaginationControl::setDefaultViewPartial('default_pagination_control.phtml');
 Zend_Registry::set('config',$config);
-//error handling
+#error handling
 if($config->setup->debug){
 	error_reporting(E_ALL|E_STRICT);
 	include_once 'Zend/Debug.php';
