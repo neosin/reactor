@@ -54,7 +54,7 @@ class Reactor_Acl{
         $permsAvailable = $cache->load(md5(UNIQUE_HASH.$select->__toString()));
         if($permsAvailable === false) {
             $permsAvailable = array();
-            #TODO is there a more efficient way to do it instead of casting to array and then casting to object ? 
+            #TODO is there a more efficient way to do it instead of casting to array and then casting to object ?
             $aclResources = self::getAclTable()->fetchAll($select)->toArray();
             foreach($aclResources as $aclResource){
                 array_push($permsAvailable, (object)$aclResource);

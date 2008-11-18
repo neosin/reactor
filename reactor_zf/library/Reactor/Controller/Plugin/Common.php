@@ -70,5 +70,4 @@ class Reactor_Controller_Plugin_Common extends Zend_Controller_Plugin_Abstract
 	{
 	}
 }
-
 ?>
