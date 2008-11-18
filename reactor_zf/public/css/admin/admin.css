@@ -45,12 +45,8 @@ button:hover {
 }
 
 /* login page */
-<<<<<<< HEAD:reactor_zf/public/css/admin/admin.css
-#extraDiv4.loginLogo {
-=======
 
 #extraDiv4.loginLogo{
->>>>>>> 70983faf3fdb29637dcecba4c5c068f34220ff1f:reactor_zf/public/css/admin/admin.css
 	width: 250px;
 	margin: auto;
 	height: 73px;
@@ -107,7 +103,7 @@ button:hover {
 }
 
 /* top menu */
-<<<<<<< HEAD:reactor_zf/public/css/admin/admin.css
+
 #topMenu {
 	background-image: url('../../images/admin/reactor_admin_top_menu_bg.png');
 	background-repeat: repeat-y;
@@ -116,7 +112,6 @@ button:hover {
 	border: 1px solid #000000;
 	padding: 10px;
 }
-=======
 
 #topMenu{
 	border: 1px solid #000000;
@@ -127,7 +122,6 @@ button:hover {
 }
 
 /* icons */
->>>>>>> 70983faf3fdb29637dcecba4c5c068f34220ff1f:reactor_zf/public/css/admin/admin.css
 
 #messageBox{
 	margin: 10px 0px;
