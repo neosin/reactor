@@ -14,9 +14,13 @@ class Admin_IndexController extends Reactor_Controller_Action_Admin
 		}
 	}
 
+	public function postDispatch(){
+		parent::postDispatch();
+	}	
+
 	public function indexAction(){
 		Zend_Layout::getMvcInstance()->enableLayout();
-		$this->render('index','default');
+		$this->render($this->getRequest()->getActionName());		
 	}
 
 	public function logInAction(){
