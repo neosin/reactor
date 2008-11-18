@@ -45,8 +45,7 @@ button:hover {
 }
 
 /* login page */
-
-#extraDiv4.loginLogo{
+#extraDiv4.loginLogo {
 	width: 250px;
 	margin: auto;
 	height: 73px;
@@ -103,9 +102,9 @@ button:hover {
 }
 
 /* top menu */
-
 #topMenu {
-	background-image: url('../../images/admin/reactor_admin_top_menu_bg.png');
+	background-image:
+		url('../../images/admin/reactor_admin_top_menu_bg.png');
 	background-repeat: repeat-y;
 	background-color: #353535;
 	background-repeat: repeat-x;
@@ -113,19 +112,20 @@ button:hover {
 	padding: 10px;
 }
 
-#topMenu{
+#topMenu {
 	border: 1px solid #000000;
-	background-image: url('../../images/admin/reactor_admin_top_menu_bg.png');
+	background-image:
+		url('../../images/admin/reactor_admin_top_menu_bg.png');
 	background-repeat: repeat-x;
 	background-color: #353535;
 	padding: 5px;
 }
 
 /* icons */
-
-#messageBox{
+#messageBox {
 	margin: 10px 0px;
 }
+
 /* icons */
 .icon {
 	background-repeat: no-repeat;
