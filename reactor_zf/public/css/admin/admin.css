@@ -1,6 +1,7 @@
 @CHARSET "UTF-8";
+
 /* defaults */
-body{
+body {
 	font-family: verdana, arial, georgia, sans-serif;
 	text-align: center;
 	background-color: #333333;
@@ -10,25 +11,25 @@ body{
 	font-size: 1em;
 }
 
-#container{
+#container {
 	text-align: justify;
 	width: 95%;
 	margin: auto;
 	position: relative;
 }
 
-label{
+label {
 	font-size: 0.75em;
 }
 
-input, textarea, button, select{
+input,textarea,button,select {
 	border: 2px solid #bbbbbb;
 	margin: 2px 0px 2px 0px;
 	background-color: #eeeeee;
 	color: #333333;
 }
 
-input:hover, textarea:hover, select:hover{
+input:hover,textarea:hover,select:hover {
 	border: 2px solid #ff0000;
 	margin: 2px 0px 2px 0px;
 	background-color: #ffffff;
@@ -36,7 +37,7 @@ input:hover, textarea:hover, select:hover{
 	font-weight: bold;
 }
 
-button:hover{
+button:hover {
 	border: 2px solid #00cc00;
 	margin: 2px 0px 2px 0px;
 	background-color: #ffffff;
@@ -44,16 +45,17 @@ button:hover{
 }
 
 /* login page */
-#extraDiv4.loginLogo{
+#extraDiv4.loginLogo {
 	width: 250px;
-	margin:auto;
+	margin: auto;
 	height: 73px;
-	background-image: url("../../images/admin/reactor_login_layer_logo.png");
+	background-image: url("../../images/admin/reactor_login_layer_logo.png")
+		;
 	background-repeat: no-repeat;
 	display: block;
 }
 
-#signInForm{
+#signInForm {
 	width: 250px;
 	margin: auto;
 	background-color: #444444;
@@ -63,11 +65,11 @@ button:hover{
 	padding: 10px;
 }
 
-#signInForm input{
+#signInForm input {
 	width: 220px;
 }
 
-#signInForm .errors{
+#signInForm .errors {
 	font-size: 0.70em;
 	color: #ff8888;
 	padding: 3px;
@@ -75,11 +77,9 @@ button:hover{
 	list-style: disc;
 	list-style-position: inside;
 }
-/* login page */
 
-/* notifications */
-
-.operations li{
+/* login page */ /* notifications */
+.operations li {
 	background-color: #DAFFE5;
 	border: 1px solid #25A24B;
 	color: #25A24B;
@@ -90,7 +90,7 @@ button:hover{
 	padding: 5px 0px 5px 25px;
 }
 
-.errors li{
+.errors li {
 	background-color: #FFECEC;
 	border: 1px solid #B90D0D;
 	color: #B90D0D;
@@ -101,9 +101,21 @@ button:hover{
 	padding: 5px 0px 5px 25px;
 }
 
-/* icons */
+/* top menu */
+#topMenu {
+	background-image: url('../../images/admin/reactor_admin_top_menu_bg.png');
+	background-repeat: repeat-y;
+	background-color: #353535;
+	background-repeat: repeat-x;
+	border: 1px solid #000000;
+	padding: 10px;
+}
 
-.icon{
+#messageBox{
+	margin: 10px 0px;
+}
+/* icons */
+.icon {
 	background-repeat: no-repeat;
 	width: 16px;
 	height: 16px;
@@ -113,10 +125,10 @@ button:hover{
 	margin: 0px 5px 0px 5px;
 }
 
-.icon.true{
+.icon.true {
 	background-image: url('../../images/icons/tick.png');
 }
 
-.icon.false{
+.icon.false {
 	background-image: url('../../images/icons/cross.png');
 }

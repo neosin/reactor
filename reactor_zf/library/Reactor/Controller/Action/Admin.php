@@ -17,10 +17,10 @@ class Reactor_Controller_Action_Admin extends Zend_Controller_Action
 	}
 
 	public function postDispatch(){
-		if($this->getRequest()->getActionName() != 'log-in' && $this->_checkAdminPanelPermission() && Reactor_Controller_Action_Admin::$postDispatchRunOnlyOnce){
+		if($this->getRequest()->getActionName() != 'log-in' && $this->_checkAdminPanelPermission() && self::$postDispatchRunOnlyOnce){
 			#this will populate all zend_layout fragments we may need
 			$this->render('top-menu','topMenu',true);
-			Reactor_Controller_Action_Admin::$postDispatchRunOnlyOnce = false;
+			self::$postDispatchRunOnlyOnce = false;
 		}
 	}
 }
