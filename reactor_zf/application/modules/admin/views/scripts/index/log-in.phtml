@@ -23,6 +23,12 @@ var baseUrl = '<?= $this->escape($this->baseUrl); ?>';
 var defaultAjaxTimeout = 800;
 </script>
 </head>
+<style type="text/css">
+#messageBox{
+	width: 250px;
+	margin:25% auto auto auto;
+}
+</style>
 <body class="nihilo">
 <div id="loadingJSResources" style="display: none;">
 <h1><span class="icon"></span> <?= $this->translate('loadingJavascriptResources')?></h1>
@@ -30,8 +36,10 @@ var defaultAjaxTimeout = 800;
 <script type="text/javascript"> document.getElementById('loadingJSResources').style.display=''; </script>
 <div id="extraDiv1"><span></span></div>
 <div id="extraDiv2"><span></span></div>
-<div id="extraDiv3"><span></span></div>
 <div id="container">
+<div id="extraDiv3"><span></span>
+<?= $this->partial('messaging.phtml',Zend_Controller_Action_HelperBroker::getStaticHelper('Messages')->getMessages()) ?>
+</div>
 <div id="extraDiv4" class="loginLogo"><span></span></div>
 <!-- container -->
 <?= $this->signInForm; ?>

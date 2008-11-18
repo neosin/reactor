@@ -46,7 +46,7 @@ button:hover{
 /* login page */
 #extraDiv4.loginLogo{
 	width: 250px;
-	margin:25% auto auto auto;
+	margin:auto;
 	height: 73px;
 	background-image: url("../../images/admin/reactor_login_layer_logo.png");
 	background-repeat: no-repeat;

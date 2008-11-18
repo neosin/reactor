@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cms\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-17 18:24+0100\n"
-"PO-Revision-Date: 2008-11-17 18:24+0100\n"
-"Last-Translator: Marcin <info@webreactor.eu>\n"
+"POT-Creation-Date: 2008-11-18 10:40+0100\n"
+"PO-Revision-Date: 2008-11-18 10:42+0100\n"
+"Last-Translator: Marcin Lulek <info@webreactor.eu>\n"
 "Language-Team: WebReactor <info@webreactor.eu>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,19 +28,27 @@ msgstr "Password"
 msgid "f_sign_in"
 msgstr "Sign in"
 
-#: reactor_zf/application/modules/admin/controllers/IndexController.php:39
+#: reactor_zf/application/modules/admin/controllers/IndexController.php:38
 msgid "o_signed_in"
-msgstr "Signed In successfully"
+msgstr "Signed in successfully"
 
-#: reactor_zf/application/layouts/default.phtml:5
+#: reactor_zf/application/modules/admin/controllers/IndexController.php:41
+msgid "e_bad_creditals"
+msgstr "You have entered wrong creditals"
+
+#: reactor_zf/application/modules/admin/controllers/IndexController.php:50
+msgid "o_signed_out"
+msgstr "Signed out successfully"
+
 #: reactor_zf/application/layouts/administration.phtml:5
+#: reactor_zf/application/layouts/default.phtml:5
 #: reactor_zf/application/modules/admin/views/scripts/index/log-in.phtml:5
 msgid "administration"
 msgstr "Administration"
 
-#: reactor_zf/application/layouts/default.phtml:28
 #: reactor_zf/application/layouts/administration.phtml:28
-#: reactor_zf/application/modules/admin/views/scripts/index/log-in.phtml:28
+#: reactor_zf/application/layouts/default.phtml:28
+#: reactor_zf/application/modules/admin/views/scripts/index/log-in.phtml:34
 msgid "loadingJavascriptResources"
 msgstr "Loading Javascript resources"
 
