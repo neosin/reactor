@@ -44,6 +44,15 @@ button:hover {
 	color: #000000;
 }
 
+/* logo */
+#logo {
+	height: 73px;
+	background-image: url("../../images/admin/reactor_login_layer_logo.png");
+	background-repeat: no-repeat;
+	background-position: right;
+	display: block;
+}
+
 /* login page */
 #extraDiv4.loginLogo {
 	width: 250px;
@@ -78,7 +87,7 @@ button:hover {
 	list-style-position: inside;
 }
 
-/* login page */ /* notifications */
+/* notifications */
 .operations li {
 	background-color: #DAFFE5;
 	border: 1px solid #25A24B;
@@ -112,13 +121,14 @@ button:hover {
 	padding: 10px;
 }
 
-#topMenu {
-	border: 1px solid #000000;
-	background-image:
-		url('../../images/admin/reactor_admin_top_menu_bg.png');
-	background-repeat: repeat-x;
-	background-color: #353535;
-	padding: 5px;
+#topMenu a {
+	color: #ffcc00;
+	text-decoration: none;
+}
+
+#topMenu div {
+	float: left;
+	margin-right: 10px;
 }
 
 /* icons */

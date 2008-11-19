@@ -13,6 +13,7 @@ echo $this->doctype('XHTML1_STRICT');?>
 ->appendStylesheet($this->baseUrl.'/css/admin/admin.css');
 $this->dojo()->setLocalPath($this->baseUrl.'/dojo/dojo/dojo.js')
 ->addStyleSheetModule('dijit.themes.nihilo')
+->addLayer($this->baseUrl.'/dojo/dojo/dojo-layout.js')
 ->addLayer($this->baseUrl.'/dojo/dojo/dojo-ui.js');
 echo $this->dojo();
 Zend_Dojo_View_Helper_Dojo::setUseProgrammatic();
