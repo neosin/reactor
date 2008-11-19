@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cms\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-18 10:40+0100\n"
-"PO-Revision-Date: 2008-11-18 10:42+0100\n"
+"POT-Creation-Date: 2008-11-19 14:00+0100\n"
+"PO-Revision-Date: 2008-11-19 14:00+0100\n"
 "Last-Translator: Marcin Lulek <info@webreactor.eu>\n"
 "Language-Team: WebReactor <info@webreactor.eu>\n"
 "MIME-Version: 1.0\n"
@@ -41,16 +41,60 @@ msgid "o_signed_out"
 msgstr "Signed out successfully"
 
 #: reactor_zf/application/layouts/administration.phtml:5
-#: reactor_zf/application/layouts/default.phtml:5
 #: reactor_zf/application/modules/admin/views/scripts/index/log-in.phtml:5
 msgid "administration"
 msgstr "Administration"
 
-#: reactor_zf/application/layouts/administration.phtml:28
+#: reactor_zf/application/layouts/administration.phtml:29
 #: reactor_zf/application/layouts/default.phtml:28
 #: reactor_zf/application/modules/admin/views/scripts/index/log-in.phtml:34
 msgid "loadingJavascriptResources"
 msgstr "Loading Javascript resources"
+
+#: reactor_zf/application/layouts/default.phtml:5
+msgid "default"
+msgstr "Default"
+
+#: reactor_zf/application/modules/admin/views/scripts/top-menu.phtml:3
+msgid "mainOptions"
+msgstr "Main Options"
+
+#: reactor_zf/application/modules/admin/views/scripts/top-menu.phtml:5
+msgid "logOut"
+msgstr "Log Out"
+
+#: reactor_zf/application/modules/admin/views/scripts/top-menu.phtml:6
+msgid "indexPage"
+msgstr "Index page"
+
+#: reactor_zf/application/modules/admin/views/scripts/top-menu.phtml:8
+msgid "options"
+msgstr "Options"
+
+#: reactor_zf/application/modules/admin/views/scripts/top-menu.phtml:13
+#: reactor_zf/application/modules/admin/views/scripts/top-menu.phtml:16
+msgid "userManagement"
+msgstr "User Management"
+
+#: reactor_zf/application/modules/admin/views/scripts/top-menu.phtml:19
+msgid "roleManagement"
+msgstr "Role Management"
+
+#: reactor_zf/application/modules/admin/views/scripts/top-menu.phtml:24
+msgid "communicationManagement"
+msgstr "Communication Management"
+
+#: reactor_zf/application/modules/admin/views/scripts/top-menu.phtml:27
+msgid "newslettersManagement"
+msgstr "Newsletters Management"
+
+#: reactor_zf/application/modules/admin/views/scripts/top-menu.phtml:32
+msgid "cmsManagement"
+msgstr "Cms Managemenet"
+
+#: reactor_zf/application/modules/admin/views/scripts/top-menu.phtml:35
+msgid "objectsManagement"
+msgstr "Objects Managemenet"
 
 #~ msgid "o_logged_in"
 #~ msgstr "Signed in successfully"

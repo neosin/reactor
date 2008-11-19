@@ -118,7 +118,7 @@ button:hover {
 	background-color: #353535;
 	background-repeat: repeat-x;
 	border: 1px solid #000000;
-	padding: 10px;
+	padding: 5px 5px 10px 5px;
 }
 
 #topMenu a {
@@ -126,9 +126,21 @@ button:hover {
 	text-decoration: none;
 }
 
-#topMenu div {
-	float: left;
-	margin-right: 10px;
+#topMenu .types li {
+	margin: 10px;
+	display: inline;
+	padding: 3px;
+	border-bottom: 5px solid transparent;
+	cursor: pointer;
+}
+#topMenu ul.section{
+	margin: 15px 0px 0px 0px;
+}
+
+#topMenu .section li {
+	margin: 0px 10px 0px 0px;
+	display: inline;
+	padding: 3px;
 }
 
 /* icons */

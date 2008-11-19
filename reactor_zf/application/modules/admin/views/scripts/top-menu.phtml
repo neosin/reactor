@@ -1,17 +1,18 @@
 <? $user = Zend_Registry::get('Reactor_User')->recreateUserSession('admin_session'); ?>
-<div class="mainManagement">
-<h1><?= $this->translate('mainOptions'); ?></h1>
-<ul>
+<ul class="types">
+<li class="mainManagement"><?= $this->translate('mainOptions'); ?></li>
+<li class="userManagement"><?= $this->translate('userManagement'); ?></li>
+<li class="communicationManagement"><?= $this->translate('communicationManagement'); ?></li>
+<li class="cmsManagement"><?= $this->translate('cmsManagement'); ?></li>
+</ul>
+<ul class="section mainManagement">
 	<li><a href="<?= $this->url(array('controller'=>'index','action'=>'log-out'),'admin',true); ?>"><span class="icon arrowUp"></span><?= $this->translate('logOut'); ?></a></li>
 	<li><a href="<?= $this->url(array('controller'=>'index'),'admin',true); ?>"><span class="icon arrowUp"></span><?= $this->translate('indexPage'); ?></a></li>
 	<?php if($user->isAllowed(Reactor_Acl::ACCESS_ADMIN_OPTIONS_PANEL,false)):?>
 	<li><a href="<?= $this->url(array('controller'=>'objects'),'admin',true); ?>"><span class="icon wrench"></span><?= $this->translate('options'); ?></a></li>
 	<?php endif;?>
 </ul>
-</div>
-<div class="userManagement">
-<h1><?= $this->translate('userManagement'); ?></h1>
-<ul>
+<ul class="section userManagement">
 <?php if($user->isAllowed(Reactor_Acl::ACCESS_ADMIN_USERS_PANEL,false)):?>
 	<li><a href="<?= $this->url(array('controller'=>'users'),'admin',true); ?>"><span class="icon users"></span><?= $this->translate('userManagement'); ?></a></li>
 	<?php endif;?>
@@ -19,21 +20,13 @@
 	<li><a href="<?= $this->url(array('controller'=>'roles'),'admin',true); ?>"><span class="icon roles"></span><?= $this->translate('roleManagement'); ?></a></li>
 	<?php endif;?>
 </ul>
-</div>
-<div class="communicationManagement">
-<h1><?= $this->translate('communicationManagement'); ?></h1>
-<ul>
+<ul class="section communicationManagement">
 	<?php if($user->isAllowed(Reactor_Acl::ACCESS_ADMIN_NEWSLETTER_PANEL,false)):?>
 	<li><a href="<?= $this->url(array('controller'=>'objects'),'admin',true); ?>"><span class="icon email"></span><?= $this->translate('newslettersManagement'); ?></a></li>
 	<?php endif;?>
 </ul>
-</div>
-<div class="cmsManagement">
-<h1><?= $this->translate('cmsManagement'); ?></h1>
-<ul>
+<ul class="section cmsManagement">
 <?php if($user->isAllowed(Reactor_Acl::ACCESS_ADMIN_OBJECT_MANAGEMENT_PANEL,false)):?>
-	<li><a href="<?= $this->url(array('controller'=>'objects'),'admin',true); ?>"><span class="icon cms"></span><?= $this->translate('Objects Management'); ?></a></li>
+	<li><a href="<?= $this->url(array('controller'=>'objects'),'admin',true); ?>"><span class="icon cms"></span><?= $this->translate('objectsManagement'); ?></a></li>
 	<?php endif;?>
 </ul>
-</div>
-<br style="clear: both">
