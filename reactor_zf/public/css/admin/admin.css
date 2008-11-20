@@ -130,7 +130,8 @@ button:hover {
 	margin: 10px;
 	display: inline;
 	padding: 3px;
-	border-bottom: 5px solid transparent;
+	border-bottom: 5px solid;
+	border-bottom-color: transparent;
 	cursor: pointer;
 }
 #topMenu ul.section{
