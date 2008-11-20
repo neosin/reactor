@@ -1,4 +1,9 @@
 <?php
+/**
+ * handles the authentication of users inside database
+ * @author ergo
+ *
+ */
 class Reactor_Acl{
     const ACCESS_ADMIN_ONLY = 1;
     const ACCESS_ADMIN_SECTION = 5;
@@ -23,6 +28,10 @@ class Reactor_Acl{
     const ACCESS_CREATE_OBJECT_GALLERY = 400;
     const ACCESS_CREATE_OBJECT_GALLERY_AGGREGATOR = 425;
     public static $_aclTable;
+    /**
+     * returns ACL table model
+     * @return Reactor_Db_Table
+     */
     public static function getAclTable(){
         if(!(self::$_aclTable instanceof Reactor_Db_Table)){
             self::$_aclTable = new Reactor_Db_Table(array(
@@ -31,15 +40,23 @@ class Reactor_Acl{
         }
         return self::$_aclTable;
     }
-
+    
+    /**
+     * check if specific roles are allowed to perform specific action on resource
+     * @param $roles (array)roles array
+     * @param $permissionName (integer)permission identifier 
+     * @param $object (integer)object identifier
+     * @param $defaultDeniedMessage (boolean)should add a default access denied message to flash messanger
+     * @return boolean
+     */
     static function isAllowed($roles,$permissionName,$object = null, $defaultDeniedMessage = true){
         $cache = Zend_Registry::get('cache_files');
         $acl = new Zend_Acl();
         #adding all the roles that user has
         $tmpRoles = array();
         foreach($roles as $role){
-            $acl->addRole(new Zend_Acl_Role($role->role));
-            array_push($tmpRoles,$role->role);
+            $acl->addRole(new Zend_Acl_Role($role->id));
+            array_push($tmpRoles,$role->id);
         };
         $select = self::getAclTable()->select()->where('role IN (?)',$tmpRoles);
         #fetching permissions for specific object from database

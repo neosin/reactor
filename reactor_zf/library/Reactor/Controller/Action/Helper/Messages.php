@@ -2,6 +2,11 @@
 require_once 'Zend/Session.php';
 require_once 'Zend/Session/Namespace.php';
 
+/**
+ * flash messaging service that preserves the message as long as its not retrieved or session cleared
+ * @author ergo
+ *
+ */
 class Reactor_Controller_Action_Helper_Messages extends Zend_Controller_Action_Helper_Abstract{
 
 	private $_session;
@@ -23,7 +28,11 @@ class Reactor_Controller_Action_Helper_Messages extends Zend_Controller_Action_H
 		}
 		return $this;
 	}
-
+	/**
+	 * returns the number of specific type messages
+	 * @param $type string
+	 * @return integer
+	 */
 	public function hasMessages($type=null){
 		$types = (array)$this->_session->getIterator();
 		$keys = array_keys($types);
@@ -44,13 +53,19 @@ class Reactor_Controller_Action_Helper_Messages extends Zend_Controller_Action_H
 		}
 		return array();
 	}
-
+	/**
+	 * returns all messages in array
+	 * @return array
+	 */
 	public function getMessages(){
 		$messages = (array)$this->_session->getIterator();
 		$this->clearMessages();
 		return $messages;
 	}
-
+	/**
+	 * clears all messages instantly
+	 * 
+	 */
 	public function clearMessages(){
 		$types = (array)$this->_session->getIterator();
 		$keys = array_keys($types);
@@ -59,6 +74,10 @@ class Reactor_Controller_Action_Helper_Messages extends Zend_Controller_Action_H
 			next($keys);
 		}
 	}
+	/**
+	 * returns total count of stored messages
+	 * @return integer
+	 */
 	public function count(){
 		$total = 0;
 		$types = (array)$this->_session->getIterator();

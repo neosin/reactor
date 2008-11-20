@@ -2,7 +2,14 @@
 class Users extends Zend_Db_Table{
     protected $_name            = 'users';
     protected $_rowClass        = 'user';
-
+    
+    /**
+     * authenticates user against database
+     * @param $username (string) username
+     * @param $password (string) md5'd password string 
+     * @param $sessionName (string)session namespace identifier
+     * @return User
+     */
     public function authUser($username, $password, $sessionName = 'userSessionName'){
         $auth = Zend_Auth::getInstance();
         $auth->setStorage(new Zend_Auth_Storage_Session($sessionName));
@@ -22,7 +29,12 @@ class Users extends Zend_Db_Table{
         $auth->getStorage()->write($userData);
         return $this->recreateUserSession($sessionName);
     }
-
+    
+    /**
+     * recreates user object from session identifier
+     * @param $sessionName (string)session namespace identifier
+     * @return User
+     */
     public function recreateUserSession($sessionName = 'userSessionName'){
         $auth = Zend_Auth::getInstance();
         $auth->setStorage(new Zend_Auth_Storage_Session($sessionName));

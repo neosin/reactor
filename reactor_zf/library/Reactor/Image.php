@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * image class prototype
+ * @author ergo
+ *
+ */
 class Reactor_Image{
 	
 	public static function factory($type,$options){
