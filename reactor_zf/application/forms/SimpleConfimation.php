@@ -1,5 +1,5 @@
 <?php
-include_once 'Zend/Form.php';
+require_once 'Zend/Form.php';
 
 class Reactor_Form_SimpleConfirmation extends Zend_Form{
 	

@@ -9,8 +9,8 @@ class Admin_IndexController extends Reactor_Controller_Action_Admin
 
     public function preDispatch(){
         #be sure to disrupt all actions
-        if(parent::preDispatch() === false){
-        	$this->_forward('index','index','admin');
+        if(parent::preDispatch() === false ){
+        	$this->_forward('log-in','index','admin');
             return false;
         }
     }
@@ -21,10 +21,11 @@ class Admin_IndexController extends Reactor_Controller_Action_Admin
 
     public function indexAction(){
         Zend_Layout::getMvcInstance()->enableLayout();
+        $this->render('index');
     }
 
     public function logInAction(){
-        $users = Zend_Registry::get('Reactor_User');
+        $users = Zend_Registry::get('Users');
         $user = $users->recreateUserSession('admin_session');
         #we dont need/want default admin layout here lets just render view for login screen
         Zend_Layout::getMvcInstance()->disableLayout();
@@ -46,7 +47,7 @@ class Admin_IndexController extends Reactor_Controller_Action_Admin
     }
 
     public function logOutAction(){
-        $user = Zend_Registry::get('Reactor_User')->recreateUserSession('admin_session');
+        $user = Zend_Registry::get('Users')->recreateUserSession('admin_session');
         $user->clear('admin_session');
         $this->getHelper('Messages')->operations = Zend_Registry::get('Zend_Translate')->_('o_signed_out');
         $this->_forward('index','index','admin');

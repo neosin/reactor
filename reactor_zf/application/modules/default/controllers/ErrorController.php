@@ -9,8 +9,8 @@ class ErrorController extends Zend_Controller_Action
 		$viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer($this->view);
 		Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
 		$this->getResponse()->clearBody();
-		include_once 'Zend/Log.php';
-		include_once 'Zend/Log/Writer/Stream.php';
+		require_once 'Zend/Log.php';
+		require_once 'Zend/Log/Writer/Stream.php';
 		$logger = new Zend_Log();
 		$error = Zend_Controller_Action::_getParam('error_handler');
 		$errorMsg = $error->exception->getMessage();

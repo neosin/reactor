@@ -49,9 +49,9 @@ class Reactor_Controller_Plugin_Common extends Zend_Controller_Plugin_Abstract
 		$this->locale = new Zend_Locale($config->setup->defaultLocale);
 		Zend_Registry::set('Zend_Locale', $this->locale);
 		Zend_Translate::setCache(Zend_Registry::get('cache'));
-		#TODO currentyl hardcoded
+		#TODO currently hardcoded
 		Zend_Registry::set('Zend_Translate', new Zend_Translate('gettext', '../data/locales/en_GB/LC_MESSAGES/default.mo', 'en'));
-		Zend_Registry::set('Reactor_User',new Users());
+		Zend_Registry::set('Users',new Users());
 	}
 
 	public function dispatchLoopStartup(Zend_Controller_Request_Abstract $request)

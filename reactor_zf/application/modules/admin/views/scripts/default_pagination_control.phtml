@@ -1,7 +1,9 @@
 <?php if ($this->pageCount): ?> 
 <div class="paginationControl">
+<span class="totals">
 <?= $this->firstItemNumber; ?> - <?= $this->lastItemNumber; ?> 
 of <strong><?= $this->totalItemCount; ?></strong>
+</span>
 <!-- Previous page link --> 
 <?php if (isset($this->previous)): ?> 
   <a href="<?= $this->url(array('page' => $this->previous)); ?>">&lt; Previous</a> | 

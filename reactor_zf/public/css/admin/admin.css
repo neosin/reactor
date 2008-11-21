@@ -34,8 +34,12 @@ input:hover,textarea:hover,select:hover {
 	margin: 2px 0px 2px 0px;
 	background-color: #ffffff;
 	color: #000000;
+}
+
+input:hover{
 	font-weight: bold;
 }
+
 
 button:hover {
 	border: 2px solid #00cc00;
@@ -147,6 +151,88 @@ button:hover {
 	margin: 0px 10px 0px 0px;
 	display: inline;
 	padding: 3px;
+}
+
+.columnHeader h1{
+	background-color: #353535;
+	color: #ffffff;
+	padding: 5px;
+}
+	
+.contentHolder{
+	background-color: #ffffff;
+	color: #000000;
+	padding: 10px;
+	border-color: #353535;
+	border-width: 0px 1px 0px 1px;
+	border-style: solid;
+}
+
+.columnFooter{
+	background-color: #353535;
+	color: #ffffff;
+	padding: 5px;
+}
+
+/* default navigation definition */
+.paginationControl {
+	font-size: 0.75em;
+	text-align: right;
+}
+
+.paginationControl .totals{
+	font-size: 0.8em;
+	vertical-align: text-bottom;
+}
+
+.paginationControl a{
+	border: 1px solid #bbbbff;
+	background-color: #eeeeff;
+	padding: 0px 3px 0px 3px;
+	text-decoration: none;
+	color: #000066;
+}
+
+.paginationControl a:hover{
+	border: 1px solid #dddddff;
+	background-color: #ffffff;
+	padding: 0px 3px 0px 3px;
+	text-decoration: none;
+	color: #0000ff;
+}
+
+
+/* default table definition */
+
+.reactorTable{
+	width: 100%;
+	border-collapse: separate;;
+	border-spacing: 1px;
+	margin: 10px 0px 10px 0px;
+	border: 1px solid #eeeeee;
+	background-color: #757575;
+}
+
+.reactorTable td{
+	font-size: 0.75em;
+}
+
+.reactorTable tbody .odd td{
+	padding: 5px;
+	background-color: #ffffff;
+}
+
+.reactorTable tbody .even td{
+	padding: 5px;
+	background-color:#efefef;
+}
+
+.reactorTable thead td{
+	background-color:#555555 !important;
+	color: #ffffff;
+	padding: 5px;
+	text-align: center;
+	font-size: 0.7em;
 }
 
 /* icons */

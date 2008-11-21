@@ -1,3 +1,15 @@
+trOver = function (){
+        dojo.query('td', this).style({
+            backgroundColor: '#eeffdb'
+        });
+    }
+
+trOut = function (){
+        dojo.query('td', this).style({
+            backgroundColor: ''
+        });
+    }
+
 init = function (){
     dojo.query('#loadingJSResources').orphan();
     /* building top menu */
@@ -16,6 +28,8 @@ init = function (){
     		});
     	});
     });
+    /* highlights for tables */
+    dojo.query(".reactorTable tbody tr").onmouseenter(trOver).onmouseleave(trOut);
 }
 
 dojo.addOnLoad(init);

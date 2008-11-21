@@ -62,13 +62,19 @@ if (get_magic_quotes_gpc()) {
 	array_walk_recursive($_COOKIE, 'cb_stripslashes');
 	array_walk_recursive($_REQUEST, 'cb_stripslashes');
 }
+try{
 #normal file cache
 $cache = Zend_Cache::factory('Core', 'File' , array('automatic_serialization' => true, 'lifetime' => 60*5 ), array('cache_dir' =>'../data/cache'));
 #files is cache that will be used in case stuff that should not get cached into solutions that may use shared memory, for example zend_db metadata or acl( that needs tags ability)
-Zend_Registry::set('cache_files',Zend_Cache::factory('Core', 'File' , array('automatic_serialization' => true, 'lifetime' => 60*10 ), array('cache_dir' =>'../data/cache/acl')));
+Zend_Registry::set('cache_files',Zend_Cache::factory('Core', 'File' , array('automatic_serialization' => true, 'lifetime' => 60*10 ), array('cache_dir' =>'../data/cache/filecache')));
 #$cache = Zend_Cache::factory('Core', 'Apc' , array('automatic_serialization' => true, 'lifetime' => 60*5 ));
 #$cache->clean(Zend_Cache::CLEANING_MODE_ALL);
 Zend_Registry::set('cache',$cache);
+}
+catch(Zend_Exception $e){
+    die('Cache dirs are not writeable');
+}
+
 #configuration
 if(!$config = $cache->load(UNIQUE_HASH.'configuration')){
 	$config = new Zend_Config_Ini('../application/config/config.ini','site');

@@ -1,4 +1,4 @@
-<? $user = Zend_Registry::get('Reactor_User')->recreateUserSession('admin_session'); ?>
+<? $user = Zend_Registry::get('Users')->recreateUserSession('admin_session'); ?>
 <ul class="types">
 <li class="mainManagement"><?= $this->translate('mainOptions'); ?></li>
 <li class="userManagement"><?= $this->translate('userManagement'); ?></li>
