@@ -10,6 +10,7 @@ class Admin_IndexController extends Reactor_Controller_Action_Admin
     public function preDispatch(){
         #be sure to disrupt all actions
         if(parent::preDispatch() === false){
+        	$this->_forward('index','index','admin');
             return false;
         }
     }

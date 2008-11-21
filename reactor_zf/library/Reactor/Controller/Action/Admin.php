@@ -6,21 +6,21 @@ class Reactor_Controller_Action_Admin extends Zend_Controller_Action
 	 * checks permissions to admin panel sections
 	 * @return unknown_type
 	 */
-	private function _checkAdminPanelPermission(){
+	protected function _checkPanelPermission($permissionId = Reactor_Acl::ACCESS_ADMIN_SECTION,$userDeniedMessage = false){
 		$user = Zend_Registry::get('Reactor_User')->recreateUserSession('admin_session');
-		return $user->isAllowed(Reactor_Acl::ACCESS_ADMIN_SECTION,false);
+		return $user->isAllowed($permissionId,$userDeniedMessage);
 	}
 
 	public function preDispatch(){
 		Zend_Layout::getMvcInstance()->setLayout('administration');
-		if($this->getRequest()->getActionName() != 'log-in' && !$this->_checkAdminPanelPermission()){
+		if($this->getRequest()->getActionName() != 'log-in' && !$this->_checkPanelPermission()){
 			$this->_forward('log-in','index','admin');
 			return false;
 		}
 	}
 
 	public function postDispatch(){
-		if($this->getRequest()->getActionName() != 'log-in' && $this->_checkAdminPanelPermission() && self::$postDispatchRunOnlyOnce){
+		if($this->getRequest()->getActionName() != 'log-in' && $this->_checkPanelPermission() && self::$postDispatchRunOnlyOnce){
 			#this will populate all zend_layout fragments we may need
 			$this->render('top-menu','topMenu',true);
 			self::$postDispatchRunOnlyOnce = false;
