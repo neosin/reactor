@@ -1,0 +1,48 @@
+<?
+$this->headLink()->appendStylesheet($this->baseUrl.'/css/admin/users/browse.css');
+#$this->headScript()->appendFile($this->baseUrl.'/js/admin/users/browse.js');
+?>
+
+<div class="columnHeader">
+<h1><span><?= $this->translate('userManagement');?></span></h1>
+</div>
+<div class="contentHolder">
+<?= $this->form; ?>
+
+<?= $this->usersPaginator; ?>
+<table class="reactorTable">
+	<thead>
+		<tr>
+			<td class="id"><?= $this->translate('dbId')?></td>
+			<td class="username"><?= $this->translate('username')?></td>
+			<td class="email"><?= $this->translate('email')?></td>
+			<td class="district"><?= $this->translate('district')?></td>
+			<td class="city"><?= $this->translate('city')?></td>
+			<td><?= $this->translate('address')?></td>
+			<td class="options"><?= $this->translate('options')?></td>
+		</tr>
+	</thead>
+	<tbody>
+	<?
+	$i = 0;
+	$users = $this->usersPaginator->getCurrentItems();
+	foreach ($users as $user):
+	$user = (object)$user;
+	?>
+		<tr class="<?php if($i%2){ echo 'even';}else{ echo 'odd';};?>">
+			<td><?= $user->id?></td>
+			<td><?= $user->username?></td>
+			<td><?= $user->email?></td>
+			<td><?= $user->district?></td>
+			<td><?= $user->city?></td>
+			<td><?= $user->address?></td>
+			<td></td>
+		</tr>
+		<?
+		$i++;
+		endforeach;?>
+	</tbody>
+</table>
+		<?= $this->usersPaginator; ?>
+</div>		
+<div class="columnFooter"><span></span></div>

@@ -1,0 +1,25 @@
+@CHARSET "UTF-8";
+
+.reactorTable thead .id {
+	width: 30px;
+}
+
+.reactorTable thead .username {
+	width: 150px;
+}
+
+.reactorTable thead .email {
+	width: 150px;
+}
+
+.reactorTable thead .district {
+	width: 100px;
+}
+
+.reactorTable thead .city {
+	width: 150px;
+}
+
+.reactorTable thead .options {
+	width: 80px;
+}
