@@ -3,7 +3,7 @@ init = function (){
     /* building top menu */
     dojo.query('#topMenu ul.section:not([class~="mainManagement"])').style('display','none');
     dojo.query('#topMenu .types li').forEach(function(elem){
-    	dojo.connect(elem,'onmouseover',function(){
+    	dojo.connect(elem,'onclick',function(){
     		dojo.animateProperty({node:elem, duration:300, properties: {borderBottomColor:'#ffcc00',}}).play();
     		dojo.query('#topMenu .section.'+elem.className).style('display','block');
     		dojo.query('#topMenu .section:not([class~="'+ elem.className +'"])').style('display','none');
