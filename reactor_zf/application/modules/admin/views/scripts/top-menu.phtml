@@ -6,8 +6,8 @@
 <li class="cmsManagement"><?= $this->translate('cmsManagement'); ?></li>
 </ul>
 <ul class="section mainManagement">
-	<li><a href="<?= $this->url(array('controller'=>'index','action'=>'log-out'),'admin',true); ?>"><span class="icon arrowUp"></span><?= $this->translate('logOut'); ?></a></li>
-	<li><a href="<?= $this->url(array('controller'=>'index'),'admin',true); ?>"><span class="icon arrowUp"></span><?= $this->translate('indexPage'); ?></a></li>
+	<li><a href="<?= $this->url(array('controller'=>'index','action'=>'log-out'),'admin',true); ?>"><span class="icon logOut"></span><?= $this->translate('logOut'); ?></a></li>
+	<li><a href="<?= $this->url(array('controller'=>'index'),'admin',true); ?>"><span class="icon arrowRefresh"></span><?= $this->translate('indexPage'); ?></a></li>
 	<?php if($user->isAllowed(Reactor_Acl::ACCESS_ADMIN_OPTIONS_PANEL,false)):?>
 	<li><a href="<?= $this->url(array('controller'=>'objects'),'admin',true); ?>"><span class="icon wrench"></span><?= $this->translate('options'); ?></a></li>
 	<?php endif;?>

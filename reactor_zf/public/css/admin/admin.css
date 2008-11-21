@@ -117,13 +117,18 @@ button:hover {
 	background-repeat: repeat-y;
 	background-color: #353535;
 	background-repeat: repeat-x;
-	border: 1px solid #000000;
-	padding: 5px 5px 10px 5px;
+	border: 1px solid #222222;
+	padding: 5px 5px 5px 5px;
+	font-size: 0.75em;
 }
 
 #topMenu a {
 	color: #ffcc00;
 	text-decoration: none;
+}
+
+#topMenu a:hover {
+	color: #ffff00;
 }
 
 #topMenu .types li {
@@ -160,10 +165,138 @@ button:hover {
 	margin: 0px 5px 0px 5px;
 }
 
-.icon.true {
+.icon.true{
 	background-image: url('../../images/icons/tick.png');
 }
 
-.icon.false {
+.icon.false{
 	background-image: url('../../images/icons/cross.png');
+}
+
+.icon.document{
+	background-image: url('../../images/icons/page_white_text.png');
+}
+
+.icon.arrowUp{
+	background-image: url('../../images/icons/arrow_up.png');
+}
+
+.icon.users{
+	background-image: url('../../images/icons/user.png');
+}
+
+.icon.roles{
+	background-image: url('../../images/icons/group.png');
+}
+
+.icon.database{
+	background-image: url('../../images/icons/database.png');
+}
+
+.icon.email{
+	background-image: url('../../images/icons/email.png');
+}
+
+.icon.wrench{
+	background-image: url('../../images/icons/wrench_orange.png');
+}
+
+.icon.cms{
+	background-image: url('../../images/icons/brick_edit.png');
+}
+
+.icon.objectUpdate{
+	background-image: url('../../images/icons/layout_edit.png');
+}
+
+.icon.objectRemove{
+	background-image: url('../../images/icons/layout_delete.png');
+}
+
+.icon.objectAdd{
+	background-image: url('../../images/icons/layout_add.png');
+}
+
+.icon.addFile{
+	background-image: url('../../images/icons/drive_add.png');
+}
+
+.icon.updateFile{
+	background-image: url('../../images/icons/drive_edit.png');
+}
+
+.icon.removeFile{
+	background-image: url('../../images/icons/drive_delete.png');
+}
+
+.icon.addPage{
+	background-image: url('../../images/icons/page_add.png');
+}
+
+.icon.updatePage{
+	background-image: url('../../images/icons/page_edit.png');
+}
+
+.icon.removePage{
+	background-image: url('../../images/icons/page_delete.png');
+}
+
+.icon.calendarAdd{
+	background-image: url('../../images/icons/calendar_add.png');
+}
+
+.icon.calendarRemove{
+	background-image: url('../../images/icons/calendar_delete.png');
+}
+
+.icon.arrowRefresh{
+	background-image: url('../../images/icons/arrow_refresh.png');
+}
+
+.icon.roleAdd{
+	background-image: url('../../images/icons/group_add.png');
+}
+
+.icon.roleUpdate{
+	background-image: url('../../images/icons/group_edit.png');
+}
+
+.icon.roleRemove{
+	background-image: url('../../images/icons/group_delete.png');
+}
+
+.icon.rolePermissions{
+	background-image: url('../../images/icons/lock.png');
+}
+
+.icon.fields{
+	background-image: url('../../images/icons/vcard.png');
+}
+
+.icon.fieldAdd{
+	background-image: url('../../images/icons/vcard_add.png');
+}
+
+.icon.fieldRemove{
+	background-image: url('../../images/icons/vcard_remove.png');
+}
+
+.icon.fieldUpdate{
+	background-image: url('../../images/icons/vcard_edit.png');	
+}
+
+.icon.fieldRemove{
+	background-image: url('../../images/icons/vcard_delete.png');
+}
+
+.icon.denied{
+	background-image: url('../../images/icons/cross.png');
+}
+
+.icon.allowed{
+	background-image: url('../../images/icons/tick.png');
+}
+
+.icon.logOut{
+	background-image: url('../../images/icons/bomb.png');
 }
