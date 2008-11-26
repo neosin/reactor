@@ -1,18 +1,18 @@
 <? $user = Zend_Registry::get('Users')->recreateUserSession('admin_session'); ?>
 <ul class="types">
-<li class="mainManagement"><?= $this->translate('mainOptions'); ?></li>
-<li class="userManagement"><?= $this->translate('userManagement'); ?></li>
-<li class="communicationManagement"><?= $this->translate('communicationManagement'); ?></li>
-<li class="cmsManagement"><?= $this->translate('cmsManagement'); ?></li>
+<li class="mainManagement <?php if ($this->request->getControllerName()=='index'):?>active<? endif;?>"><?= $this->translate('mainOptions'); ?></li>
+<li class="userManagement <?php if ($this->request->getControllerName()=='users'):?>active<? endif;?>"><?= $this->translate('userManagement'); ?></li>
+<li class="communicationManagement <?php if ($this->request->getControllerName()=='communication'):?>active<? endif;?>"><?= $this->translate('communicationManagement'); ?></li>
+<li class="cmsManagement <?php if ($this->request->getControllerName()=='cms'):?>active<? endif;?>"><?= $this->translate('cmsManagement'); ?></li>
 </ul>
-<ul class="section mainManagement">
+<ul class="section mainManagement <?php if ($this->request->getControllerName()=='index'):?>active<? endif;?>">
 	<li><a href="<?= $this->url(array('controller'=>'index','action'=>'log-out'),'admin',true); ?>"><span class="icon logOut"></span><?= $this->translate('logOut'); ?></a></li>
 	<li><a href="<?= $this->url(array('controller'=>'index'),'admin',true); ?>"><span class="icon arrowRefresh"></span><?= $this->translate('indexPage'); ?></a></li>
 	<?php if($user->isAllowed(Reactor_Acl::ACCESS_ADMIN_OPTIONS_PANEL,false)):?>
 	<li><a href="<?= $this->url(array('controller'=>'objects'),'admin',true); ?>"><span class="icon wrench"></span><?= $this->translate('options'); ?></a></li>
 	<?php endif;?>
 </ul>
-<ul class="section userManagement">
+<ul class="section userManagement <?php if ($this->request->getControllerName()=='users'):?>active<? endif;?>">
 <?php if($user->isAllowed(Reactor_Acl::ACCESS_ADMIN_USERS_PANEL,false)):?>
 	<li><a href="<?= $this->url(array('controller'=>'users'),'admin',true); ?>"><span class="icon users"></span><?= $this->translate('userManagement'); ?></a></li>
 	<?php endif;?>
@@ -20,12 +20,12 @@
 	<li><a href="<?= $this->url(array('controller'=>'roles'),'admin',true); ?>"><span class="icon roles"></span><?= $this->translate('roleManagement'); ?></a></li>
 	<?php endif;?>
 </ul>
-<ul class="section communicationManagement">
+<ul class="section communicationManagement <?php if ($this->request->getControllerName()=='communication'):?>active<? endif;?>">
 	<?php if($user->isAllowed(Reactor_Acl::ACCESS_ADMIN_NEWSLETTER_PANEL,false)):?>
 	<li><a href="<?= $this->url(array('controller'=>'objects'),'admin',true); ?>"><span class="icon email"></span><?= $this->translate('newslettersManagement'); ?></a></li>
 	<?php endif;?>
 </ul>
-<ul class="section cmsManagement">
+<ul class="section cmsManagement <?php if ($this->request->getControllerName()=='cms'):?>active<? endif;?>">
 <?php if($user->isAllowed(Reactor_Acl::ACCESS_ADMIN_OBJECT_MANAGEMENT_PANEL,false)):?>
 	<li><a href="<?= $this->url(array('controller'=>'objects'),'admin',true); ?>"><span class="icon cms"></span><?= $this->translate('objectsManagement'); ?></a></li>
 	<?php endif;?>
