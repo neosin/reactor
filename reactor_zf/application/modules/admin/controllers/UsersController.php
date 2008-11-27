@@ -32,31 +32,40 @@ class Admin_UsersController extends Reactor_Controller_Action_Admin
         }
         foreach($roles as $role){
             if($role->id != 1){
-                $form->getElement('roles')->addMultiOption($role->id,$role->name);
+                $form->getElement('role')->addMultiOption($role->id,$role->name);
             }
         }
-        $page = $this->getRequest()->getParam('page');
-        $belongs = $this->getRequest()->getParam('belongs');
-        $roles = $this->getRequest()->getParam('roles');
-        $order = $this->getRequest()->getParam('order');
-        $sort = $this->getRequest()->getParam('sort');
-
-        if($belongs && $roles){
-            $form->getElement('roles')->setValue($belongs);
-            $form->getElement('belongs')->setValue($roles);
+        $router = $this->getFrontController()->getRouter();
+        if($page = (int)$this->getRequest()->getParam('page')){
+            $router->setGlobalParam('page', $page);
         }
+        if($belongs = (int)$this->getRequest()->getParam('belongs')){
+            $router->setGlobalParam('belongs', $belongs);
+        }
+        if($role = $this->getRequest()->getParam('role')){
+            $router->setGlobalParam('role', $role);
+        }
+        if($order = $this->getRequest()->getParam('order')){
+            $router->setGlobalParam('order', $order);
+        }
+        if($sort = $this->getRequest()->getParam('sort')){
+            $router->setGlobalParam('sort', $sort);
+        }
+        $form->getElement('role')->setValue($role);
+        $form->getElement('belongs')->setValue($belongs);
+
         $this->view->form = $form;
         $usersTable = new Users();
         #fetching the data from table
         $select = $usersTable->select()->from(array('u'=>'users'));
         $select->setIntegrityCheck(false);
         $select->where('u.id > ?',1);
-        if($roles){
+        if($role){
             if($belongs){
-                $select->join(array('ur'=>'users_roles'),'ur.user=u.id AND ur.role='.(int)$roles);
+                $select->join(array('ur'=>'users_roles'),'ur.user=u.id AND ur.role='.(int)$role);
             }
             else{
-                $select->joinLeft(array('ur'=>'users_roles'),'ur.user=u.id AND ur.role='.(int)$roles);
+                $select->joinLeft(array('ur'=>'users_roles'),'ur.user=u.id AND ur.role='.(int)$role);
                 $select->where('ur.role is null');
             }
         }

@@ -40,6 +40,7 @@ include_once 'Zend/Translate.php';
 include_once 'Reactor/Acl.php';
 include_once 'Reactor/Controller/Plugin/Common.php';
 include_once 'Reactor/DbTable.php';
+include_once 'Reactor/Form.php';
 include_once 'Reactor/Image.php';
 include_once 'forms/SimpleConfimation.php';
 include_once 'forms/SignInForm.php';

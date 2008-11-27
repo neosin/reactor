@@ -1,5 +1,5 @@
 <?php
-class Reactor_Form_LogIn extends Zend_Form{
+class Reactor_Form_LogIn extends Reactor_Form{
     public function init(){
         $translate = Zend_Registry::get('Zend_Translate');
         $config = Zend_Registry::get('config');
@@ -39,24 +39,7 @@ class Reactor_Form_LogIn extends Zend_Form{
         'style'=>'width:auto'
         )
         ));
-        $this->setElementFilters(array(
-        'stringTrim'
-        ));
-
-        $this->setElementDecorators(
-        array(
-        'ViewHelper',
-        'Errors',
-        array(
-        'decorator' => array('formElement' => 'HtmlTag'), 
-        'options' => array('class'=>'formElement')
-        ),
-        array('Label', array('requiredSuffix' => '*')),
-        array(
-        'decorator' => array('formRow'=>'HtmlTag'), 
-        'options' => array('class'=>'formRow')
-        )
-        ));
+        $this->reconfigureElements();
         $this->getElement('submit')->removeDecorator('Label');
         $this->getElement('no_csrf')->removeDecorator('formElement')->removeDecorator('formRow');
     }

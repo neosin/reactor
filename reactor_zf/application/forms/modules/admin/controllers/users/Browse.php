@@ -1,12 +1,12 @@
 <?php
-class Modules_Admin_Controllers_Users_Browse_Form extends Zend_Form{
+class Modules_Admin_Controllers_Users_Browse_Form extends Reactor_Form{
     function init(){
         $translate = Zend_Registry::get('Zend_Translate');
         $this->setName('loginForm');
         $this->setTranslator($translate);
         $this->setMethod('post');
         $this->setAttrib('enctype','multipart/form-data');
-        $this->addElement('Select','roles',array(
+        $this->addElement('Select','role',array(
         'label'=>$translate->translate('role'),
         'attribs'=>array(
         'style'=>'width:auto'
@@ -27,21 +27,7 @@ class Modules_Admin_Controllers_Users_Browse_Form extends Zend_Form{
         'style'=>'width:auto'
         )
         ));
-        $this->setElementDecorators(
-        array(
-        'ViewHelper',
-        'Errors',
-        array(
-        'decorator' => array('formElement' => 'HtmlTag'), 
-        'options' => array('class'=>'formElement')
-        ),
-        array('Label', array('requiredSuffix' => '*')),
-        array(
-        'decorator' => array('formRow'=>'HtmlTag'), 
-        'options' => array('class'=>'formRow')
-        )
-        ));
-        $this->getElement('submit')->removeDecorator('Label');
+        $this->reconfigureElements();
     }
 }
 ?>
