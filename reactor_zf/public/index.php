@@ -8,50 +8,18 @@ set_include_path($root.'/../library' . PATH_SEPARATOR . '.' . PATH_SEPARATOR
 . PATH_SEPARATOR . $root.'/../application/'
 . PATH_SEPARATOR . get_include_path());
 
-# boost for opcode caches
-include_once 'Zend/Acl.php';
-include_once 'Zend/Acl/Role.php';
-include_once 'Zend/Acl/Resource.php';
-include_once 'Zend/Auth.php';
-include_once 'Zend/Auth/Adapter/Interface.php';
-include_once 'Zend/Auth/Storage/Session.php';
-include_once 'Zend/Auth/Adapter/DbTable.php';
-include_once 'Zend/Cache.php';
-include_once 'Zend/Config/Ini.php';
-include_once 'Zend/Controller/Front.php';
-include_once 'Zend/Controller/Action.php';
-include_once 'Zend/Db.php';
-include_once 'Zend/Db/Table.php';
-include_once 'Zend/Db/Table/Rowset.php';
-include_once 'Zend/Db/Table/Row.php';
-include_once 'Zend/Db/Table/Select.php';
-include_once 'Zend/Dojo.php';
-include_once 'Zend/Form.php';
-include_once 'Zend/Form/SubForm.php';
-include_once 'Zend/Layout.php';
-include_once 'Zend/Locale.php';
-include_once 'Zend/Paginator.php';
-include_once 'Zend/Paginator/Adapter/DbSelect.php';
-include_once 'Zend/View/Helper/PaginationControl.php';
-include_once 'Zend/Registry.php';
-include_once 'Zend/Session.php';
-include_once 'Zend/Session/SaveHandler/DbTable.php';
-include_once 'Zend/Translate.php';
-include_once 'Reactor/Acl.php';
-include_once 'Reactor/Controller/Plugin/Common.php';
-include_once 'Reactor/DbTable.php';
-include_once 'Reactor/Form.php';
-include_once 'Reactor/Image.php';
-include_once 'forms/SimpleConfimation.php';
-include_once 'forms/SignInForm.php';
-#include_once 'models/Object.php';
-#include_once 'models/Object/Foundation.php';
-#include_once('models/Object/Document.php');
-#include_once('models/Object/Gallery.php');
-#include_once 'models/Role.php';
+include 'Zend/Loader.php';
+Zend_Loader::registerAutoLoad();
+
+$classFileIncCache = $root .  '/../data/cache/pluginLoaderCache.php';
+if (file_exists($classFileIncCache)) {
+    include_once $classFileIncCache;
+}
+Zend_Loader_PluginLoader::setIncludeFileCache($classFileIncCache);
 include_once 'models/Users.php';
 include_once 'models/User.php';
-include_once 'models/UsersRoles.php';
+include_once 'forms/SimpleConfimation.php';
+include_once 'forms/SignInForm.php';
 
 #shut down magic quotes
 if (get_magic_quotes_gpc()) {

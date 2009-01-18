@@ -36,19 +36,10 @@ CREATE TABLE site_objects
   allow_delete boolean NOT NULL DEFAULT true,
   publish_start timestamp,
   publish_end timestamp,
-  owner integer NOT NULL DEFAULT 0,
-  parent_id integer,
-  depth integer,
-  ordering integer,
   lft integer,
   rgt integer,
   comments_total integer NOT NULL DEFAULT 0,
-  CONSTRAINT objects_pkey PRIMARY KEY (id),
-  CONSTRAINT objects_parent_id_fkey FOREIGN KEY (parent_id)
-      REFERENCES site_objects (id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE CASCADE,
-  CONSTRAINT tree_lft UNIQUE (lft),
-  CONSTRAINT ree_rgt UNIQUE (rgt)
+  CONSTRAINT objects_pkey PRIMARY KEY (id)
 ) ENGINE InnoDB CHARACTER SET=utf8;
 -- query --
 CREATE INDEX creation_date
@@ -68,22 +59,6 @@ CREATE INDEX publishing_dates
   (publish_start, publish_end);
 -- query --
 DROP TABLE IF EXISTS site_objects_tree CASCADE;
--- query --
-CREATE TABLE site_objects_tree
-(
-  id integer NOT NULL auto_increment,
-  parent_id integer NOT NULL,
-  child_id integer NOT NULL,
-  depth integer NOT NULL,
-  CONSTRAINT objects_tree_pkey PRIMARY KEY (id),
-  CONSTRAINT objects_tree_child_id_fkey FOREIGN KEY (child_id)
-      REFERENCES site_objects (id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE CASCADE,
-  CONSTRAINT objects_tree_parent_id_fkey FOREIGN KEY (parent_id)
-      REFERENCES site_objects (id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE CASCADE,
-  CONSTRAINT objects_tree_parent_id_key UNIQUE (parent_id, child_id)
-) ENGINE InnoDB CHARACTER SET=utf8;
 -- query --
 DROP TABLE IF EXISTS users;
 -- query --
@@ -426,5 +401,8 @@ INSERT INTO users_roles (user,role) VALUES(1,1);
 -- query --
 INSERT INTO users_roles (user,role) VALUES(2,2);
 -- query --
-INSERT INTO site_objects (id, title, parent_id, ordering,owner,depth,lft,rgt) VALUES
-(1, 'Root Object', NULL, 100,1,1,1,2);
+INSERT INTO site_objects (id,title,lft,rgt)
+VALUES(1,'ELECTRONICS',1,20),(2,'TELEVISIONS',2,9),(3,'TUBE',3,4),
+(4,'LCD',5,6),(5,'PLASMA',7,8),(6,'PORTABLE ELECTRONICS',10,19),
+(7,'MP3 PLAYERS',11,14),(8,'FLASH',12,13),
+(9,'CD PLAYERS',15,16),(10,'2 WAY RADIOS',17,18);
