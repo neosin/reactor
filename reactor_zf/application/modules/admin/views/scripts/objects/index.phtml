@@ -1,0 +1,9 @@
+<div class="columnHeader">
+<h1><span><?= $this->translate('Object Management');?></span></h1>
+</div>
+<div class="contentHolder">
+<? foreach($this->tree as $leaf):?>
+<?=str_repeat('----',$leaf->depth)?> <?= $leaf->id ?> <?= $leaf->title ?> <br/>
+<? endforeach; ?>
+</div>		
+<div class="columnFooter"><span></span></div>

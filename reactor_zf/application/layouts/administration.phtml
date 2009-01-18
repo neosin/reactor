@@ -2,7 +2,7 @@
 echo $this->doctype('XHTML1_STRICT');?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<?= $this->headTitle($this->translate('administration'));?>
+<?= $this->headTitle($this->translate('Administration title'));?>
 <?= $this->headMeta()->appendName('keywords', 'cms system')
 ->appendName('Content-Type', 'text/html; charset=utf-8')
 ->appendName('robots', 'all')
@@ -26,7 +26,7 @@ var defaultAjaxTimeout = 800;
 </head>
 <body class="nihilo">
 <div id="loadingJSResources" style="display: none;">
-<h1><span class="icon"></span> <?= $this->translate('loadingJavascriptResources')?></h1>
+<h1><span class="icon"></span> <?= $this->translate('Loading Javascript Resources')?></h1>
 </div>
 <script type="text/javascript"> document.getElementById('loadingJSResources').style.display=''; </script>
 <div id="extraDiv1"><span></span></div>
@@ -38,24 +38,14 @@ var defaultAjaxTimeout = 800;
 <div id="extraDiv6"><span></span></div>
 <div id="extraDiv7"><span></span></div>
 <div id="extraDiv8"><span></span></div>
-<div id="header"><!-- header -->
-<div id="logo"></div>
-<div id="topMenu"><!-- topMenu -->
-<?= $this->layout()->topMenu ?> 
-<!-- topMenu --></div>
-<!-- header --></div>
-<div id="column1"><!-- column1 --> <?= $this->layout()->leftMenu ?> <!-- column1 --></div>
-
+<div id="header"><!-- header --> <?= $this->layout()->header ?> <!-- header --></div>
+<div id="column1"><!-- column1 --> <?= $this->layout()->column1 ?> <!-- column1 --></div>
 <div id="column2"><!-- column2 -->
 <?= $this->partial('messaging.phtml',Zend_Controller_Action_HelperBroker::getStaticHelper('Messages')->getMessages()) ?>
-<?= $this->layout()->content ; ?>
-<!-- column2 --></div>
-
+<?= $this->layout()->content ; ?><!-- column2 --></div>
 <div id="column3"><!-- column3 --> <?= $this->layout()->column3 ; ?> <!-- column3 --></div>
-
 <div id="column4"><!-- column4 --> <?= $this->layout()->column4 ; ?> <!-- column4 --></div>
-
-<div id="footer"><!-- footer --><!-- footer --></div>
+<div id="footer"><!-- footer --> <?= $this->layout()->footer ; ?> <!-- footer --></div>
 <!-- container --></div>
 <div id="extraDiv9"><span></span></div>
 <div id="extraDiv10"><span></span></div>
@@ -66,8 +56,6 @@ djConfig = {
 extraLocale: ['en']
 }
 </script>
-<?= $this->headScript()
-->prependFile($this->baseUrl.'/js/admin/common.js')
-?>
+<?= $this->headScript()->prependFile($this->baseUrl.'/js/admin/common.js')?>
 </body>
 </html>
